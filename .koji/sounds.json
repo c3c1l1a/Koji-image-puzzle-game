@@ -1,0 +1,35 @@
+{
+  "sounds": {
+    "backgroundMusic": "https://audio.cdn.gometa.io/eeb2d24d-9da7-432d-843a-8d2ab34d89a9-out.mp3",
+    "matchingSound": "https://audio.cdn.gometa.io/45eb80dd-d339-4d8d-93ff-d27bfc9e81c3-out.mp3",
+    "swappingSound": "https://audio.cdn.gometa.io/29927932-c4a6-4d25-9c43-667e1b580221-out.mp3"
+  },
+  "@@editor": [
+    {
+      "key": "sounds",
+      "name": "Sounds",
+      "icon": "🔊️",
+      "source": "sounds.json",
+      "fields": [
+        {
+          "key": "backgroundMusic",
+          "name": "Background Music",
+          "description": "URL of audio file to loop in background",
+          "type": "sound"
+        },
+        {
+          "key": "matchingSound",
+          "name": "Match Sound",
+          "description": "URL of audio file to play when a match is found",
+          "type": "sound"
+        },
+        {
+          "key": "swappingSound",
+          "name": "Swap Sound",
+          "description": "URL of audio file to play when two pieces are swapped",
+          "type": "sound"
+        }
+      ]
+    }
+  ]
+}

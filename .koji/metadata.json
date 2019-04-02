@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "title": "Gem Match",
+    "description": "An easily extendable matching game. Customize it to be whatever you want with Koji.",
+    "image": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/0283d382-0feb-4d6b-86f6-69ec2817d857/dc9v7iu-3677d383-767e-48e7-b3cc-6f1b7f8ad609.png",
+    "icon": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/0283d382-0feb-4d6b-86f6-69ec2817d857/dc2fouk-ed449fbb-8fd5-49d9-9ea3-e445fea08148.png/v1/fill/w_894,h_894,strp/bejeweled_orange_gem_by_ldinos_dc2fouk-pre.png",
+    "gaCode": "UA-88788476-2"
+  },
+  "@@editor": [
+    {
+      "key": "metadata",
+      "name": "Metadata",
+      "icon": "⚙",
+      "source": "metadata.json",
+      "fields": [
+        {
+          "key": "title",
+          "name": "Name for your App",
+          "description": "Will show up as title on Google and Facebook"
+        },
+        {
+          "key": "description",
+          "name": "Description",
+          "description": "Description of your app for Google and Facebook",
+          "type": "textarea"
+        },
+        {
+          "key": "gaCode",
+          "name": "GA Tracking ID",
+          "description": "Tracking ID for Google Analytics",
+          "type": "text",
+          "typeOptions": {
+              "monospace": true
+          }
+        },
+        {
+          "key": "image",
+          "name": "Share Image",
+          "type": "image",
+          "description": "Embedded Image to load when your App is shared"
+        },
+        {
+          "key": "icon",
+          "name": "Icon",
+          "type": "image",
+          "description": "Small Icon for your App"
+        }
+      ]
+    }
+  ]
+}

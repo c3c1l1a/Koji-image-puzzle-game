@@ -1,0 +1,82 @@
+{
+  "style": {
+    "primaryColor": "#37bed1",
+    "backgroundColor": "#41557f",
+    "backgroundGradient": "#F1F3F7",
+    "textColor": "#f4f3f1",
+    "piece1": "#ee8e51",
+    "piece2": "#66de70",
+    "piece3": "#be6ae8",
+    "piece4": "#37bed1",
+    "piece5": "#eaf366",
+    "piece6": "#ffffff"
+  },
+  "@@editor": [
+    {
+      "key": "style",
+      "name": "Colors",
+      "icon": "💅",
+      "source": "style.json",
+      "fields": [
+        {
+            "key": "textColor",
+            "name": "Text color",
+            "description": "Default color for text",
+            "type": "color"
+        },
+        {
+            "key": "backgroundColor",
+            "name": "Background color",
+            "type": "color"
+        },
+        {
+            "key": "backgroundGradient",
+            "name": "Default gradient to in background",
+            "type": "color"
+        },
+        {
+            "key": "piece1",
+            "name": "Piece 1 Color",
+            "description": "Highlight and effect color for Piece",
+            "type": "color"
+        },
+        {
+            "key": "piece2",
+            "name": "Piece 2 Color",
+            "description": "Highlight and effect color for Piece",
+            "type": "color"
+        },
+        {
+            "key": "piece3",
+            "name": "Piece 3 Color",
+            "description": "Highlight and effect color for Piece",
+            "type": "color"
+        },
+        {
+            "key": "piece4",
+            "name": "Piece 4 Color",
+            "description": "Highlight and effect color for Piece",
+            "type": "color"
+        },
+        {
+            "key": "piece5",
+            "name": "Piece 5 Color",
+            "description": "Highlight and effect color for Piece",
+            "type": "color"
+        },
+        {
+            "key": "piece6",
+            "name": "Piece 6 Color",
+            "description": "Highlight and effect color for Piece",
+            "type": "color"
+        },
+        {
+            "key": "primaryColor",
+            "name": "Primary Color",
+            "description": "Backup Color for theming",
+            "type": "color"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "pieces": {
+    "image1": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/0283d382-0feb-4d6b-86f6-69ec2817d857/dc2fouk-ed449fbb-8fd5-49d9-9ea3-e445fea08148.png/v1/fill/w_894,h_894,strp/bejeweled_orange_gem_by_ldinos_dc2fouk-pre.png",
+    "image2": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/0283d382-0feb-4d6b-86f6-69ec2817d857/dc2fr2h-268ddfa0-b795-4498-a9e2-12127eede365.png/v1/fill/w_894,h_894,strp/bejeweled_green_gem_by_ldinos_dc2fr2h-pre.png",
+    "image3": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/0283d382-0feb-4d6b-86f6-69ec2817d857/dc9v7iu-3677d383-767e-48e7-b3cc-6f1b7f8ad609.png",
+    "image4": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/0283d382-0feb-4d6b-86f6-69ec2817d857/dc2j9bc-1aff4e18-9665-4fa8-8909-0ac47c77275a.png/v1/fill/w_894,h_894,strp/bejeweled_blue_gem_by_ldinos_dc2j9bc-pre.png",
+    "image5": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/0283d382-0feb-4d6b-86f6-69ec2817d857/dc7nv99-82ec4779-3d49-4592-b3d8-e9c995a9b190.png/v1/fill/w_250,h_250,strp/bejeweled_yellow_gem_by_ldinos_dc7nv99-250t.png",
+    "image6": ""
+  },
+  "@@editor": [
+    {
+      "key": "pieces",
+      "name": "Pieces",
+      "icon": "💎",
+      "source": "pieces.json",
+      "fields": [
+        {
+          "key": "image1",
+          "name": "Piece 1 Image",
+          "type": "image",
+          "description": "URL of image to put on Piece 1"
+        },
+        {
+          "key": "image2",
+          "name": "Piece 2 Image",
+          "type": "image",
+          "description": "URL of image to put on Piece 2"
+        },
+        {
+          "key": "image3",
+          "name": "Piece 3 Image",
+          "type": "image",
+          "description": "URL of image to put on Piece 3"
+        },
+        {
+          "key": "image4",
+          "name": "Piece 4 Image",
+          "type": "image",
+          "description": "URL of image to put on Piece 4"
+        },
+        {
+          "key": "image5",
+          "name": "Piece 5 Image",
+          "type": "image",
+          "description": "URL of image to put on Piece 5"
+        },
+        {
+          "key": "image6",
+          "name": "Piece 6 Image",
+          "type": "image",
+          "description": "URL of image to put on Piece 6"
+        }
+      ]
+    }
+  ]
+}
