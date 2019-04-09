@@ -1,0 +1,18 @@
+{
+  "develop": {
+    "frontend": {
+      "path": "frontend",
+      "port": 3000,
+      "events": {
+        "building": "Starting the development server...",
+        "built": "Compiled successfully!"
+      },
+      "startCommand": "npm start"
+    }
+  },
+  "pages": [{
+      "name": "Index",
+      "route": "/",
+      "path": "frontend"
+  }]
+}

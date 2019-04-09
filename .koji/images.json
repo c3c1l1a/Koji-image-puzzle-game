@@ -1,0 +1,21 @@
+{
+  "images": {
+    "icon": "https://images.koji-cdn.com/f144a602-87d8-4afd-971c-25a6fcb4f44b/c4e56bd5-6fe9-455a-aaf0-fb113437cf2a.png"
+  },
+  "@@editor": [
+    {
+      "key": "images",
+      "name": "Images",
+      "icon": "🖼️",
+      "source": "images.json",
+      "fields": [
+        {
+          "key": "icon",
+          "name": "Icon",
+          "description": "Icon that spins on the page",
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
