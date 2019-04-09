@@ -34,7 +34,7 @@ const Link = styled.a`
 const Icon = styled.div`
     animation: ${AppLogoSpin} infinite 20s linear;
     height: 40vmin;
-    width: 40vmin;
+    width: 60vmin;
     pointer-events: none;
     background-image: url(${({ theme }) => theme.images.icon});
     background-size: cover;
