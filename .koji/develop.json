@@ -11,6 +11,15 @@
         "loaded": "[koji] Frontend loaded"
       },
       "startCommand": "npm start"
+    },
+    "backend": {
+        "path": "backend",
+        "port": 3333,
+        "startCommand": "npm start",
+        "events": {
+            "started": "[koji] backend started",
+            "log": "[koji-log]"
+        }
     }
   }
 }

@@ -36,7 +36,7 @@
           "description": "URL of Image to place as background",
           "type": "image",
           "typeOptions": {
-              "fit": "cover"
+            "fit": "cover"
           }
         },
         {

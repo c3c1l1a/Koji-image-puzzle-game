@@ -13,6 +13,7 @@ import Match from '../helpers/Match.js';
 import Swap from '../helpers/Swap.js';
 import Delete from '../helpers/Delete.js';
 import Util from '../helpers/Util.js';
+import Scoring from '../helpers/Scoring.js';
 
 const Pieces = styled.div`
 	display: flex;
@@ -53,6 +54,7 @@ class Game extends React.Component {
         this.backgroundMusic = Sound.findAndLoop(this.context.sounds.backgroundMusic, this.props.muted);
         this.swappingSound = Sound.find(this.context.sounds.swappingSound);
         this.matchingSound = Sound.find(this.context.sounds.matchingSound);
+        Scoring.getScores();
         
         // calculate max size for blocks given screen size.
         this.setState({
