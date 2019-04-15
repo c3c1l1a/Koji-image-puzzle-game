@@ -45,6 +45,9 @@ export interface InboundPtyKillMessage extends InboundMessage {
 export interface InboundPtyWriteMessage extends InboundMessage {
   ptyWrite: InboundMessage.PtyWritePayload;
 }
+export interface InboundPtyResizeMessage extends InboundMessage {
+  ptyResize: InboundMessage.PtyResizePayload;
+}
 
 export namespace InboundMessage {
   export enum Type {
@@ -66,6 +69,7 @@ export namespace InboundMessage {
     PTY_SPAWN = 'pty/spawn',
     PTY_KILL = 'pty/kill',
     PTY_WRITE = 'pty/write',
+    PTY_RESIZE = 'pty/resize',
   }
 
   // Filesystem
@@ -119,5 +123,10 @@ export namespace InboundMessage {
   export interface PtyWritePayload {
     ptyId: string;
     frame: PtyFrame;
+  }
+  export interface PtyResizePayload {
+    ptyId: string;
+    cols: number;
+    rows: number;
   }
 }

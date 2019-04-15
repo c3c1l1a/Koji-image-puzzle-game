@@ -23,6 +23,8 @@ import {
   InboundPtySpawnMessage,
   InboundPtyKillMessage,
   InboundPtyWriteMessage,
+  InboundPtyResizeMessage,
+
   InboundJsonSetValueMessage,
 } from './model/InboundMessage';
 
@@ -256,6 +258,19 @@ export class Client {
           if (ptyWriteMessage.ptyWrite) {
             const { ptyId, frame } = ptyWriteMessage.ptyWrite;
             this.ptyManager.write(ptyId, frame);
+          }
+          break;
+        }
+        case InboundMessage.Type.PTY_RESIZE: {
+          // Protected message type
+          if (!this.isController) {
+            return;
+          }
+
+          const ptyResizeMessage = <InboundPtyResizeMessage> inboundMessage;
+          if (ptyResizeMessage.ptyResize) {
+            const { ptyId, cols, rows } = ptyResizeMessage.ptyResize;
+            this.ptyManager.resize(ptyId, cols, rows);
           }
           break;
         }

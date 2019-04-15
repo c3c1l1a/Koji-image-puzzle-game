@@ -8,12 +8,12 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Setup Git for our user
-RUN git config --global user.name "jones"
-RUN git config --global user.email "jones@koji-projects.com"
+RUN git config --global user.name "null"
+RUN git config --global user.email "null@koji-projects.com"
 
 # Run the init script to get our working directory set up if it needs to be
 RUN chmod +x ./.remy/scripts/init.sh
-RUN ./.remy/scripts/init.sh https://github.com/facebook/create-react-app.git create-react-app
+RUN ./.remy/scripts/init.sh https://github.com/jonesnxt/koji-create-react-app.git https://raw.githubusercontent.com/jonesnxt/koji-create-react-app/master/.koji/develop.json
 
 # Run install commands if we have them
 RUN npm install --prefix .remy

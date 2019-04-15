@@ -66,6 +66,14 @@ export class PtyManager {
     this.ptys[ptyId].write(frame);
   }
 
+  resize(ptyId: string, cols: number, rows: number) {
+    if (!this.ptys[ptyId]) {
+      return;
+    }
+
+    this.ptys[ptyId].resize(cols, rows);
+  }
+
   get ptyStatusChangedMessage(): object {
     return OutboundMessage.getPtysChangedCommand({
       ptys: Object.values(this.ptys).map(pty => pty.socketExpression),
