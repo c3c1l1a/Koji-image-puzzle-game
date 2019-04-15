@@ -1,15 +1,14 @@
 {
   "general": {
-    "name": "Nature Spin",
-    "buttonText": "Begin",
-    "fontFamily": "https://fonts.googleapis.com/css?family=Ultra",
-    "backgroundImage": "https://i.pinimg.com/originals/f7/ed/27/f7ed277bdaa9fc93381f252cdb5c7bbf.jpg",
+    "name": "Gem Match",
+    "buttonText": "Start",
+    "fontFamily": "https://fonts.googleapis.com/css?family=Pacifico",
+    "backgroundImage": "https://i.pinimg.com/originals/0d/04/4c/0d044c10cb49a675389bc0e2ff66226b.jpg",
     "width": "5",
-    "height": "3",
+    "height": "8",
     "animationLength": "500",
-    "baseScore": "50",
-    "startScore": "50000",
-    "bets": "100, 500, 1000, 5000"
+    "baseScore": "60",
+    "moves": "20"
   },
   "@@editor": [
     {
@@ -51,9 +50,9 @@
           "description": "Number of pieces per column"
         },
         {
-          "key": "bets",
-          "name": "Possible Bets",
-          "description": "Comma seperated list of bets the user can make"
+          "key": "moves",
+          "name": "Moves Per Game",
+          "description": "Number of times the user can move a piece per game"
         },
         {
           "key": "baseScore",
@@ -61,9 +60,9 @@
           "description": "Minimum score per piece matched"
         },
         {
-          "key": "startScore",
-          "name": "Start Score",
-          "description": "Score for the user to start at"
+          "key": "animationLength",
+          "name": "Animation Length",
+          "description": "Time in milliseconds to animate each piece movement"
         }
       ]
     }

@@ -4,7 +4,7 @@ let { koji } = process.env;
 function getBlockSize(rows, columns) {
     return Math.min(
         (window.innerWidth - 32) / rows,
-        (window.innerHeight - 70) / (parseInt(columns) + 3)
+        (window.innerHeight - 70) / (parseInt(columns) + 1)
     );
 }
 

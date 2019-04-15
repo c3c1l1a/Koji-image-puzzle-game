@@ -26,10 +26,6 @@ module.exports = require('./webpack.base.babel')({
   optimization: {
     minimize: false,
   },
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000
-  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
 

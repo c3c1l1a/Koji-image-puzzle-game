@@ -11,25 +11,17 @@ const BottomBox = styled.div`
     font-size: ${({ size }) => size / 2}px;
 `;
 
-const ScoreDelta = styled.div.attrs((props) => ({
+const Moves = styled.div.attrs((props) => ({
     style: {
-        transform: `${props.scoreDeltaChange ? 'scale(1.5, 1.5)' : 'scale(1, 1)'}`,
+        transform: `${props.movesChange ? 'scale(2, 2)' : 'scale(1, 1)'}`,
     },
 }))`
     transition: transform 0.25s ease-in-out;
-    color: #FF4136;
-
-    ${({ positive }) => positive && `
-        color: #2ECC40;
-        ::before {
-            content: '+';
-        }
-    `}
 `;
 
 const Score = styled.div.attrs((props) => ({
     style: {
-        transform: `${props.scoreChange ? 'scale(1.1, 1.1)' : 'scale(1, 1)'}`,
+        transform: `${props.scoreChange ? 'scale(2, 2)' : 'scale(1, 1)'}`,
     },
 }))`
     transition: transform 0.4s ease-in-out;
@@ -41,7 +33,7 @@ class BottomBar extends React.PureComponent {
 
         this.state = {
             scoreChange: false,
-            scoreDeltaChange: false,
+            movesChange: false,
         };
     }
 
@@ -51,9 +43,9 @@ class BottomBar extends React.PureComponent {
             setTimeout(() => this.setState({ scoreChange: false }), 400);
         }
 
-        if(this.props.scoreDelta !== newProps.scoreDelta) {
-            this.setState({ scoreDeltaChange: true });
-            setTimeout(() => this.setState({ scoreDeltaChange: false }), 200);
+        if(this.props.moves !== newProps.moves) {
+            this.setState({ movesChange: true });
+            setTimeout(() => this.setState({ movesChange: false }), 200);
         }
     }
 
@@ -61,7 +53,7 @@ class BottomBar extends React.PureComponent {
         return (
             <BottomBox size={this.props.size}>
                 <Score scoreChange={this.state.scoreChange}>{this.props.score}</Score>
-                <ScoreDelta positive={this.props.scoreDelta > 0} scoreDeltaChange={this.state.scoreDeltaChange}>{this.props.scoreDelta}</ScoreDelta>
+                <Moves movesChange={false}>{this.props.moves} {this.props.moves === 1 ? 'Move' : 'Moves'} Left</Moves>
             </BottomBox>
         );
     }

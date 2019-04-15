@@ -48,7 +48,7 @@ function find(newBoard, width, height) {
         }
     }
 
-    return marked;
+    return findPowerups(newBoard, marked);
 }
 
 function addMarked(x, y, length, direction) {
@@ -123,8 +123,31 @@ function mark(newBoard, marked, width, height) {
     marked.forEach((mark) => {
         let { x, y } = mark;
 
-        newBoard[x][y].matched = true;
+        if (mark.rowPower) {
+            newBoard[x][y].rowPower = true;
+            newBoard[x][y].deleted = false;
+        } else if (mark.typePower) {
+            newBoard[x][y].typePower = true;
+            newBoard[x][y].deleted = false;
+        } else {
+            // dont delete the same block twice
+            if(newBoard[x][y].deleted !== true) {
+                newBoard[x][y].deleted = true;
+                while(--y >= 0) {
+                    newBoard[x][y].deltaY ++;
+                }
+            }
+        }
     });
+
+    for(let i=0;i<width;i++) {
+        if (newBoard[i].length > height) {
+            // there are shadow elements, deal with them
+            for (let j=height;j<newBoard[i].length;j++) {
+                newBoard[i][j].deltaY += newBoard[i].length - height;
+            }
+        }
+    }
 
     return newBoard;
 }
