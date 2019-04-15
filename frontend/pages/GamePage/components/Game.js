@@ -7,6 +7,7 @@ import Piece from './Piece';
 import Effect from './Effect';
 import GameOver from './GameOver';
 import BottomBar from './BottomBar';
+import BetAmount from './BetAmount';
 
 import Sound from '../helpers/Sound.js';
 import Match from '../helpers/Match.js';
@@ -30,6 +31,26 @@ const Container = styled.div`
     margin: 0 auto;
 `;
 
+const ReRoll = styled.div`
+    margin-top: 16px;
+    font-size: ${({ blockSize }) => blockSize / 2}px;
+    border: 5px solid white;
+    border-radius: ${({ blockSize }) => blockSize / 4}px;
+    background-color: rgba(0,0,0,0.1);
+    :hover {
+        background-color: rgba(0,0,0,0.6);
+        ${({ disabled }) => disabled && 'background-color: rgba(240, 30, 10, 0.8);'}
+    }
+
+    :active {
+        transform: scale(1.1, 1.1);
+    }
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease-in-out;
+    ${({ disabled }) => disabled && 'background-color: rgba(240, 30, 10, 0.8);'}
+`;
+
 class Game extends React.Component {
     constructor(props) {
         super(props);
@@ -38,23 +59,28 @@ class Game extends React.Component {
             board: [],
             effects: [],
             score: 0,
-            moves: 0,
-            multiplier: 1,
+            scoreChange: 0,
             blockSize: 50,
-            swipeStart: { x: 0, y: 0 },
-            swipeDelta: { x: 0, y: 0 },
-            swiping: false,
-            pieceSelected: false,
+            currentBet: 100,
             gameOver: false,
+            rowsSpinning: 0,
         };
 
     }
 
     componentDidMount() {
         this.backgroundMusic = Sound.findAndLoop(this.context.sounds.backgroundMusic, this.props.muted);
-        this.swappingSound = Sound.find(this.context.sounds.swappingSound);
-        this.matchingSound = Sound.find(this.context.sounds.matchingSound);
+        this.winSound = Sound.find(this.context.sounds.winSound);
+        this.loseSound = Sound.find(this.context.sounds.loseSound);
         Scoring.getScores();
+
+        document.addEventListener('keypress', (e) => {
+            console.log(e.keyCode);
+            if(e.keyCode === 32) {
+                // space was pressed
+                this.reroll();
+            }
+        })
         
         // calculate max size for blocks given screen size.
         this.setState({
@@ -87,19 +113,16 @@ class Game extends React.Component {
 
         this.setState({
             board: newBoard,
-            moves: parseInt(this.context.general.moves),
-            score: 0,
-            multiplier: 1,
+            score: parseInt(this.context.general.startScore),
+            currentBet: this.context.general.bets.split(',')[0],
             gameOver: false,
         }, () => this.checkMatches());
     }
-        
+
     prepMatching(callback) {
         this.setState({
             pieceSelected: undefined,
             busy: true,
-            moves: this.state.moves - 1,
-            multiplier: 1,
         }, () => callback());
     }
 
@@ -114,7 +137,7 @@ class Game extends React.Component {
         console.log(found);
         if (found.length > 0) {
             // we have at least one match, deal with it.
-
+            
             this.manageAnimation(() => {
                 // setup
                 newBoard = this.copy(this.state.board);
@@ -123,23 +146,21 @@ class Game extends React.Component {
             }, () => {
                 // animate
                 newBoard = this.copy(this.state.board);
-                Sound.play(this.matchingSound, this.props.muted);
+                Sound.play(this.winSound, this.props.muted);
                 this.props.onFlash(Util.getColor(newBoard[found[0].x][found[0].y].type));
 
                 newBoard = Match.mark(newBoard, found, this.context.general.width, this.context.general.height);
                 this.collectEffects(newBoard, found);
                 this.setState({ board: newBoard });
             }, () => {
-                // update dom
-                newBoard = this.copy(this.state.board);
-                newBoard = Match.sweep(newBoard, this.context.general.width, this.context.general.height);
-                // cleaned, reset state then lets run it again
-                this.setState({ board: newBoard, multiplier: this.state.multiplier + 1 });
             }, () => {
-                // callback
-                this.checkMatches();
+              if(!this.context.general.bets.split(',').includes(this.state.currentBet)) {
+                this.setState({ currentBet: this.state.score });
+              }
             });
         } else {
+            this.setState({ scoreChange: -this.state.currentBet });
+            Sound.play(this.loseSound, this.props.muted);
             // we are done, commit..., and check game over
             setTimeout(() => {
                 this.setState({ busy: false, effects: [], gameOver: this.state.moves === 0 });
@@ -147,45 +168,52 @@ class Game extends React.Component {
         }
     }
 
-    swapPieces(p1, p2) {
-        let newBoard = {};
-        // animate swap
-        this.manageAnimation(() => {
-            // setup
-            Sound.play(this.swappingSound, this.props.muted);
-        }, () => {
-            // animate
-            newBoard = this.copy(this.state.board);
-            newBoard = Swap.setupAnimation(newBoard, p1, p2);
-            this.setState({ board: newBoard })
-        }, () => {
-            // update dom
-            newBoard = this.copy(this.state.board);
-            newBoard = Swap.swapPieces(newBoard, p1, p2);
-            // cleaned, on to the next thing
-            this.setState({ board: newBoard });
-        }, () => {
-            // callback
-            this.prepMatching(() => this.checkMatches());
+    startSpin() {
+        this.setState({
+            rowsSpinning: this.context.general.width,
+            score: this.state.score - this.state.currentBet,
         });
+
+        this.spinterval = setInterval(() => {
+            let newBoard = [];
+            const numTypes = Util.getNumTypes();
+            for(let i=0; i<this.context.general.width - this.state.rowsSpinning;i++) {
+                newBoard.push([]);
+                for(let j=0;j<this.context.general.height;j++) {
+                    newBoard[i].push(this.state.board[i][j]);
+                }
+            }
+            
+            for(let i=this.context.general.width - this.state.rowsSpinning;i<this.context.general.width;i++) {
+                newBoard.push([]);
+                for(let j=0;j<this.context.general.height;j++) {
+                    newBoard[i].push(Util.newElement(numTypes));
+                }
+            }
+
+            this.setState({
+                board: newBoard,
+            });
+
+        }, 100)
     }
 
-    pieceClick(x, y) {
-        if(this.state.busy) return;
-        let newBoard = this.copy(this.state.board);
-
-        if (this.state.pieceSelected) {
-            // check orothogonality
-            if (Math.abs(x - this.state.pieceSelected.x) + Math.abs(y - this.state.pieceSelected.y) === 1) {
-                // we have orthogorality, swap pieces and see if theres a match.
-                this.swapPieces({ x, y }, this.state.pieceSelected);
-            } else {
-                newBoard[this.state.pieceSelected.x][this.state.pieceSelected.y].selected = false;
-                this.setState({ board: newBoard, pieceSelected: undefined });
-            }
+    stopSpin() {
+        if(this.state.rowsSpinning !== 1) {
+            this.setState({ rowsSpinning: this.state.rowsSpinning - 1 });
         } else {
-            newBoard[x][y].selected = true;
-            this.setState({ board: newBoard, pieceSelected: { x, y } });
+            this.setState({ rowsSpinning: 0 });
+            clearInterval(this.spinterval);
+            this.checkMatches();
+        }
+    }
+
+    reroll() {
+        if(this.state.rowsSpinning === 0) {
+            if(this.state.score < this.state.currentBet) return;
+            this.startSpin();
+        } else {
+            this.stopSpin();
         }
     }
 
@@ -217,45 +245,16 @@ class Game extends React.Component {
         console.log(marked);
         let newScore = this.state.score;
         marked.forEach((mark) => {
-            let amount = this.context.general.baseScore * this.state.multiplier;
+            let amount = this.context.general.baseScore * (this.state.currentBet / 100);
             let color = Util.getColor(newBoard[mark.x][mark.y].type);
             effects.push({ x: mark.x, y: mark.y, amount, color });
             newScore += amount; 
         });
 
-        this.setState({ score: newScore, effects: this.state.effects.concat(effects) });
-    }
+        newScore = Math.round(newScore);
+        let scoreDelta = Math.round((newScore - this.state.score) - this.state.currentBet);
 
-    startSwipe(e, x, y) {
-        this.setState({ swiping: true, swipeStart: { x: e.clientX, y: e.clientY } });
-        this.pieceClick(x, y);
-    }
-
-    moveSwipe(e) {
-        if (this.state.swiping) {
-            this.setState({ swipeDelta: {
-                x: e.clientX - this.state.swipeStart.x,
-                y: e.clientY - this.state.swipeStart.y,
-            }});
-        }
-    }
-
-    endSwipe(e) {
-        e.preventDefault();
-        console.log('end');
-        let dx = this.state.swipeDelta.x;
-        let dy = this.state.swipeDelta.y;
-        this.setState({ swiping: false, swipeStart: { x: 0, y: 0 }, swipeDelta: { x: 0, y: 0 } });
-
-        if(Math.abs(dx) + Math.abs(dy) > this.state.blockSize / 2) {
-            if(Math.abs(dx) > Math.abs(dy)) {
-                this.pieceClick(this.state.pieceSelected.x + (dx > 0 ? 1 : -1), this.state.pieceSelected.y);
-            } else {
-                this.pieceClick(this.state.pieceSelected.x, this.state.pieceSelected.y + (dy > 0 ? 1 : -1));
-            }
-        } else {
-            // if the swipe is not far its a click, just hang out.
-        }
+        this.setState({ score: newScore, effects: this.state.effects.concat(effects), scoreChange: scoreDelta });
     }
 
 	render() {
@@ -274,17 +273,14 @@ class Game extends React.Component {
                             deltaX={e.deltaX}
                             x={x}
                             y={y}
+                            matched={e.matched}
                             size={this.state.blockSize}
+                            spinning={this.state.rowsSpinning}
                             height={this.context.general.height}
                             animate={this.state.animate}
                             color={Util.getColor(e.type)}
                             image={Util.getImage(e.type)}
-                            onTouchEnd={(e) => this.endSwipe(e)}
-                            onMouseUp={(e) => this.endSwipe(e)}
-                            onTouchMove={(e) => this.moveSwipe(e.touches[0])}
-                            onMouseMove={(e) => this.moveSwipe(e)}
-                            onTouchStart={(e) => this.startSwipe(e.touches[0], x, y)}
-                            onMouseDown={(e) => this.startSwipe(e, x, y)}
+                            onClick={() => this.reroll()}
                         />
                     )))}
                     {this.state.effects.map((effect) => (
@@ -299,8 +295,22 @@ class Game extends React.Component {
                 <BottomBar
                     size={this.state.blockSize}
                     score={this.state.score}
-                    moves={this.state.moves}
+                    scoreDelta={this.state.scoreChange}
                 />
+                <BetAmount
+                    bets={this.context.general.bets}
+                    size={this.state.blockSize}
+                    currentBet={this.state.currentBet}
+                    onChangeBet={(newBet) => {
+                        if(this.state.rowsSpinning !== 0) return;
+                        if (newBet === 'Max') {
+                            this.setState({ currentBet: this.state.score });
+                        } else {
+                            this.setState({ currentBet: newBet });
+                        }
+                    }} 
+                />
+                <ReRoll disabled={this.state.rowsSpinning === 0 && this.state.score < this.state.currentBet} onClick={() => this.reroll()} blockSize={this.state.blockSize}>{this.state.rowsSpinning === 0 ? 'Spin Again' : 'Stop'}</ReRoll>
 
                 {this.state.gameOver && (
                     <GameOver score={this.state.score} onClose={() => this.newGame()} />

@@ -1,11 +1,11 @@
-![Gem Crush](https://i.imgur.com/pEirZfj.jpg)
+![Nature Spin](https://i.imgur.com/eUMChDK.png)
 
-*A classic match-three game that's mobile first and production ready.*
+*An easily customizable slot machine type game*
 
 ## Things to customize
-- 💎 Replace the jewels with your own images
+- 🌞 Replace the images that you match
     * [Open configuration](#~/.koji/pieces.json!visual)
-- 🔈 Change the sounds for swipes and matches
+- 🔈 Change the sounds for winning and losing
     * [Open configuration](#~/.koji/sounds.json!visual)
 - 💅 Change the background, fonts, and visual style
     * [Open configuration](#~/.koji/style.json!visual)
@@ -16,9 +16,6 @@ When you're ready, [deploy your project](#~/.koji/deploy.json!visual) and share 
 
 ## Code structure
 You can find the code for the main game board [here](#~/frontend/pages/GamePage/components/Game.js).
-
-## Tutorials
-[!yt](https://www.youtube.com/watch?v=-Sga63rvfGY)
 
 ## Support and suggestions
 Please feel free to contact me if you have any suggestions!

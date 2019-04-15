@@ -1,6 +1,6 @@
 {
   "deploy": {
-    "subdomain": "candy.withkoji.com",
+    "subdomain": "naturespin.withkoji.com",
     "frontend": {
       "output": "frontend/build",
       "commands": [

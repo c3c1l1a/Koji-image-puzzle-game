@@ -1,8 +1,10 @@
 {
   "sounds": {
-    "backgroundMusic": "https://audio.cdn.gometa.io/eeb2d24d-9da7-432d-843a-8d2ab34d89a9-out.mp3",
+    "backgroundMusic": "",
     "matchingSound": "https://audio.cdn.gometa.io/45eb80dd-d339-4d8d-93ff-d27bfc9e81c3-out.mp3",
-    "swappingSound": "https://audio.cdn.gometa.io/29927932-c4a6-4d25-9c43-667e1b580221-out.mp3"
+    "swappingSound": "https://audio.cdn.gometa.io/29927932-c4a6-4d25-9c43-667e1b580221-out.mp3",
+    "winSound": "https://objects.koji-cdn.com/4f8c2997-1f38-4ea9-8297-7a08abd60ef9/d8c3e3bb-f17f-4187-b8dc-56fc351251de.mp3",
+    "loseSound": "https://objects.koji-cdn.com/4f8c2997-1f38-4ea9-8297-7a08abd60ef9/33583063-66ce-4c46-8964-bd841b96d4ea.mp3"
   },
   "@@editor": [
     {
@@ -18,15 +20,15 @@
           "type": "sound"
         },
         {
-          "key": "matchingSound",
-          "name": "Match Sound",
-          "description": "URL of audio file to play when a match is found",
+          "key": "winSound",
+          "name": "Win Sound",
+          "description": "URL of audio file to play when the player wins",
           "type": "sound"
         },
         {
-          "key": "swappingSound",
-          "name": "Swap Sound",
-          "description": "URL of audio file to play when two pieces are swapped",
+          "key": "loseSound",
+          "name": "Lose Sound",
+          "description": "URL of audio file to play when the player loses",
           "type": "sound"
         }
       ]

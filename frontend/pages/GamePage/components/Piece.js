@@ -9,7 +9,7 @@ const Piece = styled.div.attrs((props) => ({
                 ${(props.y >= props.height ?
                     (props.height - props.y - 1) * props.size : props.y * props.size)
                     + (props.deltaY * props.size)}px
-            ) ${props.deleted ? ' scale(0.01, 0.01)' : ''}
+            ) ${props.matched || props.theme.general.width - props.spinning === props.x ? 'scale(1.1, 1.1)' : ''}
         `,        
     },
 }))`
@@ -41,8 +41,17 @@ const Piece = styled.div.attrs((props) => ({
 
     ${(props) => props.typePower && `
         border-radius: 100%;
-        box-shadow: inset 0 0 20px 15px rgba(0,0,0,0.70);
+        box-shadow: inset 0   20px 15px rgba(0,0,0,0.70);
     `};
+
+    ${(props) => props.theme.general.width - props.spinning === props.x && `
+        background: center / contain no-repeat url(${props.image}),rgba(255, 200, 14, 0.6);
+    `}
+
+    ${(props) => props.matched && `
+        background: center / contain no-repeat url(${props.image}), ${ props.color};
+    `}
+
 `;
 
 export default Piece;
