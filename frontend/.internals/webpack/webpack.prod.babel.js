@@ -36,15 +36,6 @@ module.exports = require('./webpack.base.babel')({
         minifyCSS: true,
         minifyURLs: true,
       },
-    title: kojiProjectConfig.metadata.title,
-      meta: {
-        "title": kojiProjectConfig.metadata.title,
-        "description": kojiProjectConfig.metadata.description,
-        "og:title": kojiProjectConfig.metadata.title,
-        "og:description": kojiProjectConfig.metadata.description,
-        "og:image": kojiProjectConfig.metadata.image,
-        "og:type": 'website',
-      },
       inject: true,
     }),
 

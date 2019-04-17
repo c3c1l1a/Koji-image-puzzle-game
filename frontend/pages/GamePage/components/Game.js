@@ -28,6 +28,7 @@ const Pieces = styled.div`
 const Container = styled.div`
     width: ${({ width }) => width}px;
     margin: 0 auto;
+    margin-bottom: 24px;
 `;
 
 class Game extends React.Component {
@@ -111,7 +112,6 @@ class Game extends React.Component {
         let newBoard = this.copy(this.state.board);
         
         let found = Match.find(newBoard, this.context.general.width, this.context.general.height);
-        console.log(found);
         if (found.length > 0) {
             // we have at least one match, deal with it.
 
@@ -214,7 +214,6 @@ class Game extends React.Component {
 
     collectEffects(newBoard, marked) {
         let effects = [];
-        console.log(marked);
         let newScore = this.state.score;
         marked.forEach((mark) => {
             let amount = this.context.general.baseScore * this.state.multiplier;
@@ -242,7 +241,6 @@ class Game extends React.Component {
 
     endSwipe(e) {
         e.preventDefault();
-        console.log('end');
         let dx = this.state.swipeDelta.x;
         let dy = this.state.swipeDelta.y;
         this.setState({ swiping: false, swipeStart: { x: 0, y: 0 }, swipeDelta: { x: 0, y: 0 } });

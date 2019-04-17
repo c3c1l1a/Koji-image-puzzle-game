@@ -2,9 +2,10 @@
 let { koji } = process.env;
 
 function getBlockSize(rows, columns) {
+    let height = (typeof window.orientation !== "undefined") ? window.innerHeight - 66 : window.innerHeight;
     return Math.min(
         (window.innerWidth - 32) / rows,
-        (window.innerHeight - 70) / (parseInt(columns) + 1)
+        (height - 70) / (parseInt(columns) + 1)
     );
 }
 
@@ -19,7 +20,6 @@ function getImage(type) {
 function getNumTypes() {
     let i = 0;
     while(koji.pieces[`image${i + 1}`] && koji.pieces[`image${i + 1}`].length !== 0) i ++;
-    console.log(i);
     return i;
 }
 

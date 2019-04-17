@@ -32,15 +32,6 @@ module.exports = require('./webpack.base.babel')({
     new HtmlWebpackPlugin({
       inject: true,
       template: '.internals/webpack/resources/index.html',
-      title: kojiProjectConfig.metadata.title,
-      meta: {
-          "title": kojiProjectConfig.metadata.title,
-          "description": kojiProjectConfig.metadata.description,
-          "og:title": kojiProjectConfig.metadata.title,
-          "og:description": kojiProjectConfig.metadata.description,
-          "og:image": kojiProjectConfig.metadata.image,
-          "og:type": 'website',
-      }
     }),
 
     new CircularDependencyPlugin({

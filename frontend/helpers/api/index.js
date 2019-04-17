@@ -4,7 +4,6 @@ let routeConfig = {};
 
 if (koji.backend && koji.routes) {
     const backendHost = window.location.host.replace('frontend', 'backend');
-    console.log(koji.backend, koji.routes);
     routeConfig = koji.routes.reduce((acc, { name, route, method, isProtected }) => {
         acc[name] = {
             url: koji.backend[name],

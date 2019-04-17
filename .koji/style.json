@@ -25,16 +25,6 @@
             "type": "color"
         },
         {
-            "key": "backgroundColor",
-            "name": "Background color",
-            "type": "color"
-        },
-        {
-            "key": "backgroundGradient",
-            "name": "Default gradient to in background",
-            "type": "color"
-        },
-        {
             "key": "piece1",
             "name": "Piece 1 Color",
             "description": "Highlight and effect color for Piece",
@@ -74,6 +64,18 @@
             "key": "primaryColor",
             "name": "Primary Color",
             "description": "Backup Color for theming",
+            "type": "color"
+        },
+        {
+            "key": "backgroundColor",
+            "name": "Background color",
+            "description": "backup color to be displayed while a background image is loading",
+            "type": "color"
+        },
+        {
+            "key": "backgroundGradient",
+            "name": "Default gradient to in background",
+            "description": "To enable a background gradient if a background image isn't used",
             "type": "color"
         }
       ]
