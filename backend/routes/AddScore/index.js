@@ -26,8 +26,9 @@ export default async (req, res) => {
     console.log(scoreData);
 
     // Insert the post
-    let scores = (await Store.get('gems', 'scores')).scores;
+    let scores = (await Store.get('gems', 'scores'));
     if(!scores) scores = [];
+    else scores = scores.scores;
     scores.push(scoreData);
     await Store.set('gems', 'scores', {
         scores,
