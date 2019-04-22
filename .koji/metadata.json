@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "title": "Spin to Win",
-    "description": "Spin the wheel and match at least 3 in a row to win. Easily customizable at gokoji.com.",
-    "image": "https://images.koji-cdn.com/9649a5cc-380a-4e8f-bcdb-21110518587e/Screenshot from 2019-04-15 22-39-04.png",
-    "icon": "https://images.koji-cdn.com/9649a5cc-380a-4e8f-bcdb-21110518587e/slot-machine-2.png",
+    "title": "Create React App",
+    "description": "A create-react-app scaffold modified specifically for Koji. Easily customizable at gokoji.com.",
+    "image": "https://images.koji-cdn.com/025a4ca3-2c61-4cf2-b821-55b7023c47dc/kojireact.png",
+    "icon": "https://objects.koji-cdn.com/025a4ca3-2c61-4cf2-b821-55b7023c47dc/94e432a7-951b-4b41-a726-d5d9fc66c533.ico",
     "gaCode": ""
   },
   "@@editor": [
