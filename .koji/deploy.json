@@ -7,6 +7,72 @@
         "cd frontend",
         "npm install",
         "export NODE_ENV=production && npm run build"
+      ],
+      "injections": [
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<meta property=\"og:image\" content=\"${metadata.image}\">"
+        },
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<meta property=\"og:title\" content=\"${metadata.title}\">"
+        },
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<meta property=\"og:description\" content=\"${metadata.description}\">"
+        },
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<meta property=\"title\" content=\"${metadata.title}\">"
+        },
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<meta property=\"description\" content=\"${metadata.description}\">"
+        },
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<title>${metadata.title}</title>"
+        },
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', '${metadata.gaCode}', 'auto');ga('send', 'pageview');</script>"
+        },
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<link rel=\"shortcut icon\" href=\"${metadata.icon}\" />"
+        }
       ]
     }
   }

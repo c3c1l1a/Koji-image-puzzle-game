@@ -3,7 +3,8 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import Game from './components/Game';
 import Config from './config.json';
-import { GlobalContext } from './GlobalContext';
+import GlobalContext from './GlobalContext';
+import wrapConsole from './helpers/wrapConsole';
 
 const Container = styled.div`
     padding: 0;
@@ -15,6 +16,11 @@ class App extends React.PureComponent {
       super(props);
 
       this.state = {};
+  }
+
+  componentWillMount() {
+    wrapConsole(); // eslint-disable-line no-native-reassign
+    console.log('[koji] frontend started');
   }
 
   render() {

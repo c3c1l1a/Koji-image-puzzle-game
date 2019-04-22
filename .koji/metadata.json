@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "title": "Spin to Win",
+    "description": "Spin the wheel and match at least 3 in a row to win. Easily customizable at gokoji.com.",
+    "image": "https://images.koji-cdn.com/9649a5cc-380a-4e8f-bcdb-21110518587e/Screenshot from 2019-04-15 22-39-04.png",
+    "icon": "https://images.koji-cdn.com/9649a5cc-380a-4e8f-bcdb-21110518587e/slot-machine-2.png",
+    "gaCode": ""
+  },
+  "@@editor": [
+    {
+      "key": "metadata",
+      "name": "Metadata",
+      "icon": "⚙",
+      "source": "metadata.json",
+      "fields": [
+        {
+          "key": "title",
+          "name": "Name for your App",
+          "description": "Will show up as title on Google and Facebook"
+        },
+        {
+          "key": "description",
+          "name": "Description",
+          "description": "Description of your app for Google and Facebook",
+          "type": "textarea"
+        },
+        {
+          "key": "gaCode",
+          "name": "GA Tracking ID",
+          "description": "Tracking ID for Google Analytics",
+          "type": "text",
+          "typeOptions": {
+            "monospace": true
+          }
+        },
+        {
+          "key": "image",
+          "name": "Share Image",
+          "type": "image",
+          "description": "Embedded Image to load when your App is shared"
+        },
+        {
+          "key": "icon",
+          "name": "Icon",
+          "type": "image",
+          "description": "Small Icon for your App"
+        }
+      ]
+    }
+  ]
+}

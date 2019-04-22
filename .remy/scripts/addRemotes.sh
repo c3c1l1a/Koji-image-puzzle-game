@@ -23,6 +23,8 @@ fi
 
 echo "Setting new origin"
 
+git fetch upstream
+git merge upstream/master
 git remote add origin $3
 git add -A
 git commit -m "Initial commit"
