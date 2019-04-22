@@ -1,9 +1,0 @@
-{
-  "routes": [{
-    "name": "GetScores",
-    "path": "backend/routes/GetScores",
-    "route": "/scores/get",
-    "method": "GET",
-    "isProtected": false
-  }]
-}

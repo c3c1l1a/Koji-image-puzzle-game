@@ -6,20 +6,11 @@
       "events": {
         "started": "[webpack] Frontend server started",
         "building": "[webpack] Frontend building",
-        "built": "##frontend-built##",
+        "built": "Compiled successfully.",
         "build-error": "[webpack] Frontend build error",
         "loaded": "[koji] Frontend loaded"
       },
       "startCommand": "npm start"
-    },
-    "backend": {
-        "path": "backend",
-        "port": 3333,
-        "startCommand": "npm start",
-        "events": {
-            "started": "[koji] backend started",
-            "log": "[koji-log]"
-        }
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "style": {
+  "colors": {
     "primaryColor": "#37bed1",
     "backgroundColor": "#41557f",
     "backgroundGradient": "#F1F3F7",
@@ -13,10 +13,10 @@
   },
   "@@editor": [
     {
-      "key": "style",
+      "key": "colors",
       "name": "Colors",
       "icon": "💅",
-      "source": "style.json",
+      "source": "colors.json",
       "fields": [
         {
             "key": "textColor",

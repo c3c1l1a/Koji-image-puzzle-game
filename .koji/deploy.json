@@ -1,6 +1,6 @@
 {
   "deploy": {
-    "subdomain": "candy.withkoji.com",
+    "subdomain": ".withkoji.com",
     "frontend": {
       "output": "frontend/build",
       "commands": [
@@ -57,14 +57,6 @@
           "position": "after",
           "value": "<title>${metadata.title}</title>"
         }
-      ]
-    },
-    "backend": {
-      "output": "backend/dist",
-      "commands": [
-        "cd backend",
-        "npm install",
-        "export NODE_ENV=production && npm run compile"
       ]
     }
   }

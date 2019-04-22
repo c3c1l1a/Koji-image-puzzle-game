@@ -1,9 +1,0 @@
-{
-  "routes": [{
-    "name": "AddScore",
-    "path": "backend/routes/AddScore",
-    "route": "/scores/add",
-    "method": "POST",
-    "isProtected": false
-  }]
-}
