@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const kojiProjectConfig = require('../.koji/resources/scripts/buildConfig.js')();
 
 module.exports = {
+  watch: true,
   entry: "./main.js",
   output: {
       path: __dirname,

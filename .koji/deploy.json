@@ -56,6 +56,22 @@
           "site": "<head>",
           "position": "after",
           "value": "<title>${metadata.title}</title>"
+        },
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', '${metadata.gaCode}', 'auto');ga('send', 'pageview');</script>"
+        },
+        {
+          "paths": [
+            "*.html"
+          ],
+          "site": "<head>",
+          "position": "after",
+          "value": "<link rel=\"shortcut icon\" href=\"${metadata.icon}\" />"
         }
       ]
     }

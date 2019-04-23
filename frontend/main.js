@@ -2,6 +2,7 @@ import * as p5 from './p5.min.js';
 import wrapConsole from './helpers/wrapConsole';
 import App from './src';
 
+wrapConsole();
 console.log('[koji] Frontend loaded');
 
 Object.entries(App).map(([name, module]) => {

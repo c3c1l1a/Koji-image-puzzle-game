@@ -1,0 +1,21 @@
+{
+  "images": {
+    "mouse": "https://images.koji-cdn.com/be061740-660e-475b-b943-3f560db3a57f/c0dfd1c8-6973-4cfe-82a4-b4ee7cf04030.png"
+  },
+  "@@editor": [
+    {
+      "key": "images",
+      "name": "Images",
+      "icon": "🖼",
+      "source": "images.json",
+      "fields": [
+        {
+          "key": "mouse",
+          "name": "Mouse",
+          "type": "image",
+          "description": "Image that will follow the mouse around on the screen"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "strings": {
+    "content": "Koji P5 Scaffold"
+  },
+  "@@editor": [
+    {
+      "key": "strings",
+      "name": "Strings",
+      "icon": "✎",
+      "source": "strings.json",
+      "fields": [
+        {
+          "key": "content",
+          "name": "Page Content"
+        }
+      ]
+    }
+  ]
+}
