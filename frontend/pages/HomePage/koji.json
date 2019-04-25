@@ -1,0 +1,7 @@
+{
+	"pages": [{
+		"name": "Index",
+        "route": "/",
+        "path": "frontend/pages/HomePage"
+	}]
+}
