@@ -1,7 +1,0 @@
-{
-	"pages": [{
-		"name": "Game",
-        "route": "/",
-        "path": "frontend/src"
-	}]
-}

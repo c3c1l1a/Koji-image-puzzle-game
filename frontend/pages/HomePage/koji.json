@@ -1,6 +1,6 @@
 {
 	"pages": [{
-		"name": "Index",
+		"name": "HomePage",
         "route": "/",
         "path": "frontend/pages/HomePage"
 	}]

@@ -1,1 +1,9 @@
-// this is a koji file
+{
+  "routes": [{
+    "name": "SampleRoute",
+    "path": "backend/routes/SampleRoute",
+    "route": "/test",
+    "method": "GET",
+    "isProtected": false
+  }]
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import GlobalContext from '../GlobalContext';
+import GlobalContext from '../../common/GlobalContext';
 
 const Container = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundColor};

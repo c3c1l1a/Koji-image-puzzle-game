@@ -1,10 +1,11 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import Game from './components/Game';
-import Config from './config.json';
+import HomePage from '../pages/HomePage';
 import GlobalContext from './GlobalContext';
-import wrapConsole from './helpers/wrapConsole';
+import wrapConsole from '../koji_utilities/wrapConsole';
+
+const  { koji } = process.env;
 
 const Container = styled.div`
     padding: 0;
@@ -26,9 +27,9 @@ class App extends React.PureComponent {
   render() {
     return (
       <Container>
-        <ThemeProvider theme={Config}>
-          <GlobalContext.Provider value={Config}>
-            <Game />
+        <ThemeProvider theme={koji}>
+          <GlobalContext.Provider value={koji}>
+            <HomePage />
           </GlobalContext.Provider>
         </ThemeProvider>
       </Container>
