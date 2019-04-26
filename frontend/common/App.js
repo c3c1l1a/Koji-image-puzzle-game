@@ -1,3 +1,22 @@
+/**
+ * common/App.js
+ * 
+ * What it Does:
+ *   This is our root React Element. The rest of our app is initialized here.
+ *   In this file we set up the react context and styled-components theme
+ *   to use our koji customization properties. Now anywhere in our react
+ *   or styled components we can use these customizations. This file also
+ *   sets up wrapConsole.js, which allows us to see console.log()'s in the
+ *   koji preview window. Lastly this file sets up an event listener on 
+ *   postMessage to see if the editor has sent us any new customization
+ *   updates.
+ * 
+ * Things to Change:
+ *   Any element or library that should be globally available accross all
+ *   pages should be put here. Also this is a great place to put a router
+ *   if you want multiple pages in your application.
+ */
+
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -14,21 +33,37 @@ const Container = styled.div`
 
 class App extends React.PureComponent {
   constructor(props) {
-      super(props);
+    super(props);
 
-      this.state = {};
+    this.state = {
+      koji: koji || {},
+    }
   }
 
   componentWillMount() {
     wrapConsole(); // eslint-disable-line no-native-reassign
     console.log('[koji] frontend started');
+
+    // Wire debug hooks for theme if in development environment
+    if (process.env.NODE_ENV !== 'production') {
+        window.addEventListener('message', ({ data }) => {
+            // Global context injection
+            if (data.action === 'injectGlobal') {
+                const { scope, key, value } = data.payload;
+                this.setState((prevState) => {
+                    prevState[scope][key] = value;
+                    return prevState;
+                });
+            }
+        }, false);
+    }
   }
 
   render() {
     return (
       <Container>
-        <ThemeProvider theme={koji}>
-          <GlobalContext.Provider value={koji}>
+        <ThemeProvider theme={this.state.koji}>
+          <GlobalContext.Provider value={this.state.koji}>
             <HomePage />
           </GlobalContext.Provider>
         </ThemeProvider>

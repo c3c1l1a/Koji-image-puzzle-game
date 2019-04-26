@@ -1,3 +1,16 @@
+/**
+ * common/index.css
+ *
+ * What it Does:
+ *   This is your global CSS file, this file will style every page and
+ *   component in your application.
+ *
+ * Things to Change:
+ *   If you want any CSS properties to persist through all of your app
+ *   or if any element you import has to be styled globally, this is the
+ *   file to use.
+ */
+
 body {
   margin: 0;
   padding: 0;

@@ -4,7 +4,7 @@
   "description": "A sample project",
   "author": "username",
   "scripts": {
-    "compile": "NODE_ENV=production webpack --config webpack.prod.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "build": "NODE_ENV=production webpack --config ./.internals/webpack.production.js --color -p --progress --hide-modules --display-optimization-bailout",
     "start": "webpack-dev-server --config ./.internals/webpack.development.js"
   },
   "dependencies": {
@@ -19,15 +19,17 @@
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.5",
-    "html-webpack-plugin": "^3.2.0",
-    "offline-plugin": "^5.0.6",
     "css-loader": "^2.1.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
     "install": "^0.12.2",
     "npm": "^6.9.0",
+    "offline-plugin": "^5.0.6",
     "style-loader": "^0.23.1",
-    "webpack-cli": "^3.3.1",
     "webpack": "^4.30.0",
-    "webpack-dev-server": "^3.3.1"
-
+    "webpack-cli": "^3.3.1",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-manifest-plugin": "^2.0.4",
+    "workbox-webpack-plugin": "^4.3.0"
   }
 }

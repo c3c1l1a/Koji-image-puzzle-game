@@ -6,9 +6,8 @@
       "events": {
         "started": "[webpack] Frontend server started",
         "building": "[webpack] Frontend building",
-        "built": "[webpack] Frontend built",
-        "build-error": "[webpack] Frontend build error",
-        "loaded": "[koji] Frontend loaded"
+        "built": "Compiled successfully.",
+        "build-error": "[webpack] Frontend build error"
       },
       "startCommand": "npm start"
     },

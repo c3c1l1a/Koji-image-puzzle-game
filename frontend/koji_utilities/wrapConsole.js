@@ -1,3 +1,22 @@
+/**
+ * koji_utilities/wrapConsole.js
+ * 
+ * What it Does:
+ *   This utility wraps around the normal console.log() function
+ *   in order to allow koji to display the logs from your app in
+ *   the embedded preview within your editor. 
+ * 
+ * What to Change:
+ *   This file is fairly complicated and deals with internal koji
+ *   schemas about how to handle iframe postMessage's, so changing
+ *   around how this works is not advisable.
+ * 
+ * How to Use:
+ *   Import this file and run it as a function once your component
+ *   has mounted, see common/App.js to see an implementation. This
+ *   is already done for you in this project so don't worry about it.
+ */
+
 export default () => {
   // Outgoing
   window.__originalConsole = {

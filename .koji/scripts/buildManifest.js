@@ -1,9 +1,24 @@
-const fs = require('fs');
+/**
+ * buildManifest.js
+ * 
+ * What it does:
+ *   This file takes the data that it finds in metadata.json and
+ *   wraps it up into a json string of a PWA complient manifest
+ *   file. This file should be included and used to serve
+ *   a static manifest.json on the root of your project.
+ * 
+ * Things to Edit:
+ *   If you would like any specific options for your PWA 
+ *   manifest.json file like more icon sizes or a different
+ *   theme color, you can add them to the manifest variable
+ *   below.
+ */
 
+const fs = require('fs');
 
 module.exports = () => {
 
-    const { metadata } = JSON.parse(fs.readFileSync('../.koji/metadata.json', 'utf8'));
+    const { metadata } = JSON.parse(fs.readFileSync('../.koji/project/metadata.json', 'utf8'));
 
     const manifest = {
         fingerprints: false, 

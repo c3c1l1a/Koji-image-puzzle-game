@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo ahahahahaha
+echo Clone Successful

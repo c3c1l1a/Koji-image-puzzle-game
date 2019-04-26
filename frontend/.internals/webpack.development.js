@@ -1,8 +1,29 @@
+/**
+ * webpack.development.js
+ * 
+ * What it Does:
+ *   Webpack is the system that this project uses to turn react code into
+ *   plain javascript. This file tells webpack what to do when you want
+ *   a development server to be created. This file sets up automatic reload
+ *   as well as putting the configuration options into process.env to be
+ *   picked up by the react app.
+ * 
+ * Things to Edit:
+ *   Be careful when editing webpack configuration as it gets confusing
+ *   quickly. If you want to make any changes to how your app is being
+ *   rendered in development then this is the place to look. Things like
+ *   transpiling a new file type or adding a webpack plugin can be done
+ *   here.
+ */
+
 var path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+var ManifestPlugin = require('webpack-manifest-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const kojiProjectConfig = require('../../.koji/scripts/buildConfig.js')();
-const kojiManifest = require('../../.koji/scripts/buildConfig.js')();
+const kojiManifest = require('../../.koji/scripts/buildManifest.js')();
 
 module.exports = {
   watch: true,
@@ -101,11 +122,11 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: path.join(__dirname, '/../common/'),
     compress: true,
     port: 8080,
     host: '0.0.0.0',
-    disableHostCheck: true
+    disableHostCheck: true,
+    overlay: true,
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -114,5 +135,15 @@ module.exports = {
         koji: kojiProjectConfig,
       },
     }),
+    new ManifestPlugin({
+      fileName: 'manifest.json',
+      basePath: '/',
+      seed: JSON.parse(kojiManifest),
+    }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: './common/index.html',
+    }),
+    new WorkboxPlugin.GenerateSW(),
   ]
 };

@@ -40,7 +40,7 @@ const Icon = styled.div`
     background-size: cover;
 `;
 
-class Game extends React.PureComponent {
+class HomePage extends React.PureComponent {
   render() {
     return (
       <Container>
@@ -58,6 +58,6 @@ class Game extends React.PureComponent {
   }
 }
 
-Game.contextType = GlobalContext;
+HomePage.contextType = GlobalContext;
 
-export default Game;
+export default HomePage;
