@@ -35,12 +35,14 @@ module.exports = () => {
                 sizes: '32x32',
             },
             {
-                src: metadata.icon,
-                sizes: '192x192'
+                src: metadata.icon192,
+                sizes: '192x192',
+                type: 'image/png',
             },
             {
-                src: metadata.icon,
-                sizes: '512x512'
+                src: metadata.icon512,
+                sizes: '512x512',
+                type: 'image/jpg',
             }
         ],
     }

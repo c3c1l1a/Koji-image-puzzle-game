@@ -136,7 +136,7 @@ module.exports = {
       },
     }),
     new ManifestPlugin({
-      fileName: 'manifest.json',
+      fileName: 'manifest.webmanifest',
       basePath: '/',
       seed: JSON.parse(kojiManifest),
     }),

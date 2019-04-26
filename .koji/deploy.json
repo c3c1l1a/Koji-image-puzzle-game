@@ -1,6 +1,6 @@
 {
   "deploy": {
-    "subdomain": "newstuff.withkoji.com",
+    "subdomain": "newstuff2.withkoji.com",
     "frontend": {
       "output": "frontend/build",
       "commands": [

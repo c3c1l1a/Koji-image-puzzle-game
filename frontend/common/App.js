@@ -50,10 +50,9 @@ class App extends React.PureComponent {
             // Global context injection
             if (data.action === 'injectGlobal') {
                 const { scope, key, value } = data.payload;
-                this.setState((prevState) => {
-                    prevState[scope][key] = value;
-                    return prevState;
-                });
+                let temp_koji = JSON.parse(JSON.stringify(this.state.koji));
+                temp_koji[scope][key] = value;
+                this.setState({ koji: temp_koji });
             }
         }, false);
     }

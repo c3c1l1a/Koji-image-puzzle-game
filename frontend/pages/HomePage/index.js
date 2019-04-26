@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+
 import GlobalContext from '../../common/GlobalContext';
+import Request from '../../koji_utilities/request';
 
 const Container = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundColor};
@@ -41,21 +43,34 @@ const Icon = styled.div`
 `;
 
 class HomePage extends React.PureComponent {
-  render() {
-    return (
-      <Container>
-        <Icon />
-        <Content>{this.context.strings.content}</Content>
-        <Link
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          >
-            Learn React
-        </Link>
-      </Container>
-    );
-  }
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            response: '',
+        };
+    }
+
+    componentDidMount() {
+        Request(this.context.backend.SampleRoute).then((resp) => console.log(resp));
+    }
+
+    render() {
+        return (
+            <Container>
+                <Icon />
+                <Content>{this.context.strings.content}</Content>
+                <Content>{this.state.response}</Content>
+                <Link
+                href="https://reactjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                    Learn React
+                </Link>
+            </Container>
+        );
+    }
 }
 
 HomePage.contextType = GlobalContext;
