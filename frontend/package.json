@@ -5,7 +5,7 @@
   "author": "username",
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./.internals/webpack.production.js --color -p --progress --hide-modules --display-optimization-bailout",
-    "start": "webpack-dev-server --config ./.internals/webpack.development.js"
+    "start": "webpack-dev-server --config ./.internals/webpack.development.js --hot"
   },
   "dependencies": {
     "react": "^16.8.6",

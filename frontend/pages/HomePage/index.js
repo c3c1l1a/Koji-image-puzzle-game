@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 
 import GlobalContext from '../../common/GlobalContext';
 import Request from '../../koji_utilities/request';
+import Routes from '../../koji_utilities/routes';
 
 const Container = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundColor};
@@ -25,8 +26,8 @@ const AppLogoSpin = keyframes`
   }
 `;
 
-const Content = styled.p`
-
+const Content = styled.div`
+  padding-bottom: 8px;
 `;
 
 const Link = styled.a`
@@ -40,6 +41,7 @@ const Icon = styled.div`
     pointer-events: none;
     background-image: url(${({ theme }) => theme.images.icon});
     background-size: cover;
+    margin-bottom: 16px;
 `;
 
 class HomePage extends React.PureComponent {
@@ -52,15 +54,15 @@ class HomePage extends React.PureComponent {
     }
 
     componentDidMount() {
-        Request(this.context.backend.SampleRoute).then((resp) => console.log(resp));
+        Request(Routes.SampleRoute).then((e) => this.setState({ response: e.response }));
     }
 
     render() {
         return (
             <Container>
                 <Icon />
-                <Content>{this.context.strings.content}</Content>
                 <Content>{this.state.response}</Content>
+                <Content>{this.context.strings.content}</Content>
                 <Link
                 href="https://reactjs.org"
                 target="_blank"
