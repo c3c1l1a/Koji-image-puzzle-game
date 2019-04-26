@@ -63,7 +63,7 @@ module.exports = () => {
         projectConfig.backend = {};
         if (projectConfig.routes) {
             projectConfig.routes.forEach(({ name, route }) => {
-                projectConfig.backend[name] = `${process.env.KOJI_BACKEND_URL}${route}`;
+                projectConfig.backend[name] = `${process.env.JIRO_BACKEND_URL}${route}`;
             });
         }
       } catch (err) {
