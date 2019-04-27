@@ -9,7 +9,7 @@ COPY . .
 
 # Run the init script to get our working directory set up if it needs to be
 RUN chmod +x ./.remy/scripts/init.sh
-RUN ./.remy/scripts/init.sh https://github.com/jonesnxt/koji-create-react-app.git
+RUN ./.remy/scripts/init.sh https://github.com/jonesnxt/koji-react-scaffold.git
 
 # Run install commands if we have them
 RUN npm install --prefix .remy
