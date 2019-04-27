@@ -1,0 +1,33 @@
+{
+  "colors": {
+    "linkColor": "#5dd9fd",
+    "backgroundColor": "#5b75ab",
+    "textColor": "#f8f3f3"
+  },
+  "@@editor": [
+    {
+      "key": "colors",
+      "name": "Colors",
+      "icon": "💅",
+      "source": "colors.json",
+      "fields": [
+        {
+          "key": "textColor",
+          "name": "Text color",
+          "description": "Default color for text",
+          "type": "color"
+        },
+        {
+          "key": "backgroundColor",
+          "name": "Background color",
+          "type": "color"
+        },
+        {
+          "key": "linkColor",
+          "name": "Link Color",
+          "type": "color"
+        }
+      ]
+    }
+  ]
+}

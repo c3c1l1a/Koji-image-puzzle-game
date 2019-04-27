@@ -1,15 +1,18 @@
-# Create React App With Koji
+# Koji React Scaffold
 
-This template is a modification of the npm package `create-react-app` that is made specifically as a Koji template. Modifications have been made to work in the Koji editor, but the original code can be found commented out at the bottom of each file if the files have been modified.
+Welcome to your new Koji React Project.
 
 -------
-[Original documentation can be found here](#~/REACT_README.md!visual)
-# Modifications
-1. New Component [Game.js](#~/frontend/src/components/Game.js) acts as the global container for the application.
-2. The application is styled using `styled-components`
-3. 3 Visual Configuration Controls (VCCs) have been added to the template. These can be quickly modified to your applicaiton
-    - [Colors](#~/.koji/colors.json!visual) - Change the text color, background color, & link text color.
-    - [Images](#~/.koji/images.json!visual) - Change the spinning icon.
-    - [Strings](#~/.koji/strings.json!visual) - Change the page content text & link text.
+# Where to go
+1. Your Frontend code is located at /frontend/pages and there is an example page at [HomePage](#~/frontend/pages/HomePage/index.js)
+2. Your Backend code is located at /backend/routes and there is an example route at [SampleRoute](#~/backend/routes/SampleRoute/index.js)
+3. 3 Visual Customization Controls (VCCs) have been added to the template. These can be quickly modified to your applicaiton
+    - [Colors](#~/.koji/customization/colors.json!visual) - Change the text color, background color, & link text color.
+    - [Images](#~/.koji/customization/images.json!visual) - Change the spinning icon.
+    - [Strings](#~/.koji/customization/strings.json!visual) - Change the page content text & link text.
 
-See [Game.js](#~/frontend/src/components/Game.js) to see how each VCC is used within the context of both `styled-components` and within the global context.
+## Any Questions?
+
+Join our [Discord Server](https://discord.gg/eQuMJF6) for Koji for any software questions or bugs.   
+Any ideas/issues/fixes/pull requests can get sent to either the [Github Repositotry](https://github.com/jonesnxt/koji-react-scaffold)
+or by message to [the template creator](https://gokoji.com/profile/jones)
