@@ -51,7 +51,6 @@ export class Pty {
     });
 
     this.proc.on('exit', (code) => {
-      console.log('exited', code);
       if (this.onExit) {
         this.onExit(code);
       }

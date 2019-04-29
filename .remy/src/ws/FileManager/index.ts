@@ -166,4 +166,29 @@ export class FileManager {
       this.onOpenFilesChanged();
     }
   }
+
+  onFilesMoved(source: string, dest: string) {
+    this.files
+      .filter(({ path }) => path.startsWith(source))
+      .forEach((file) => {
+        const { path } = file;
+        const newPath = path.replace(source, dest);
+        this.close(path);
+        this.open(newPath);
+      });
+  }
+
+  onFileRemoved(path: string) {
+    this.close(path);
+  }
+
+  onFileChangedOnDisk(path: string) {
+    if (path !== this.currentFile) {
+      const file = this.fileForPath(path);
+      if (file) {
+        file.setHasChangedOnDisk();
+        this.onOpenFilesChanged();
+      }
+    }
+  }
 }

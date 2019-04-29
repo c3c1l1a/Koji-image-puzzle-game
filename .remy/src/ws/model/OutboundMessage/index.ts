@@ -1,6 +1,7 @@
 import { ClientState } from '../ClientState';
 import { DiskUsage } from '../../helpers/getDiskUsage';
 import { MemoryUsage } from '../../helpers/getMemoryUsage';
+import { TreeItem } from '../../FilesystemManager/helpers/buildTree';
 
 export namespace OutboundMessage {
 ////////////////////////////////////////////////////////////////////////////////
@@ -148,6 +149,7 @@ export interface ConnectedClientsChanged {
 
 export interface FilesystemChanged {
   paths: string[];
+  tree: TreeItem[];
 }
 
 export interface KojifilesChanged {
@@ -169,6 +171,7 @@ export interface OpenFile {
   sticky: boolean;
   editorType: EditorType;
   hasUnsavedChanges: boolean;
+  hasChangedOnDisk: boolean;
 }
 export interface OpenFilesChanged {
   openFiles: OpenFile[];

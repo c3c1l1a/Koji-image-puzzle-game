@@ -5,7 +5,7 @@ export interface BaseFile {
   open(editorType?: EditorType): void;
   applyOperation?(fromSessionId: string, operationString: string): void;
   jsonSetValue?(fromSessionId: string, key: string, newValue: string): void;
-  save?(): void;
+  save(): void;
   close?(): void;
 }
 
@@ -18,6 +18,7 @@ export class BaseFile {
   protected sticky: boolean = false;
   public editorType: EditorType = EditorType.CODE;
   protected hasUnsavedChanges: boolean = false;
+  protected hasChangedOnDisk: boolean = false;
 
   constructor(server: Server, projectPath: string, path: string) {
     this.server = server;
@@ -31,6 +32,7 @@ export class BaseFile {
       sticky: this.sticky,
       editorType: this.editorType,
       hasUnsavedChanges: this.hasUnsavedChanges,
+      hasChangedOnDisk: this.hasChangedOnDisk,
     };
   }
 
@@ -51,6 +53,15 @@ export class BaseFile {
 
   get isSticky(): boolean {
     return this.sticky;
+  }
+
+  setHasChangedOnDisk() {
+    this.hasChangedOnDisk = true;
+  }
+
+  save() {
+    this.hasChangedOnDisk = false;
+    this.hasUnsavedChanges = false;
   }
 
   broadcastContents() {

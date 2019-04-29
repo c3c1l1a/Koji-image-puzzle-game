@@ -97,7 +97,7 @@ export async function getKojifilesChangedMessage(): Promise<object> {
             };
           }
         } else {
-          // Otherwise, set it
+          configFile[key]['@@PATH'] = filePath.replace('/usr/src/app/', '');
           projectConfig[key] = configFile[key];
         }
 

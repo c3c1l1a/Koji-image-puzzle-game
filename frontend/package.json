@@ -5,7 +5,7 @@
   "author": "username",
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./.internals/webpack.production.js --color -p --progress --hide-modules --display-optimization-bailout",
-    "start": "webpack-dev-server --config ./.internals/webpack.development.js --hot"
+    "start": "webpack-dev-server --config ./.internals/webpack.development.js"
   },
   "dependencies": {
     "react": "^16.8.6",
@@ -22,6 +22,7 @@
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
     "exports-loader": "^0.7.0",
+    "extra-watch-webpack-plugin": "^1.0.3",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "install": "^0.12.2",

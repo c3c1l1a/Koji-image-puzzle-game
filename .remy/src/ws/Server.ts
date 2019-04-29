@@ -51,8 +51,8 @@ export class Server {
     this.creatorUsername = creatorUsername;
 
     this.gitManager = new GitManager(this);
-    this.filesystemManager = new FilesystemManager(this, this.gitManager, projectPath, remoteBucketName, remoteBucketPrefix);
     this.fileManager = new FileManager(this, projectPath, this.gitManager);
+    this.filesystemManager = new FilesystemManager(this, this.gitManager, this.fileManager, projectPath, remoteBucketName, remoteBucketPrefix);
     this.ptyManager = new PtyManager(this, projectPath, creatorUsername);
 
     this.server = require('http').createServer();

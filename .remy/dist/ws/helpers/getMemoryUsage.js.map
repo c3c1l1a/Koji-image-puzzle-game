@@ -1,0 +1,1 @@
+{"version":3,"file":"getMemoryUsage.js","sourceRoot":"","sources":["../../../src/ws/helpers/getMemoryUsage.ts"],"names":[],"mappings":";;AAAA,uBAAyB;AAMzB;IACE,IAAM,UAAU,GAAG,EAAE,CAAC,OAAO,EAAE,GAAG,EAAE,CAAC,QAAQ,EAAE,CAAC;IAChD,OAAO;QACL,GAAG,EAAE,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC,GAAG,UAAU,CAAC,GAAG,IAAI,CAAC,GAAG,EAAE;KAC9C,CAAC;AACJ,CAAC;AALD,wCAKC"}

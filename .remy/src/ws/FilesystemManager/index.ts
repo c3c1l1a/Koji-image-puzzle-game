@@ -11,10 +11,13 @@ import { rimraf } from './helpers/rimraf';
 import { RemoteSync } from './helpers/RemoteSync';
 import { getKojifilesChangedMessage } from './helpers/getKojifilesChangedMessage';
 import { GitManager } from '../GitManager';
+import { buildTree } from './helpers/buildTree';
+import { FileManager } from '../FileManager';
 
 export class FilesystemManager {
   private readonly server: Server;
   private readonly gitManager: GitManager;
+  private readonly fileManager: FileManager;
   private readonly projectPath: string;
 
   private readonly remoteSync: RemoteSync;
@@ -30,11 +33,13 @@ export class FilesystemManager {
   private gitfilesChangedDebounceTimer: Timer | null = null;
 
   public get filesystemChangedMessage(): object {
+    const paths = [
+      '.git-info',
+      ...this.files.filter(file => file),
+    ];
     return OutboundMessage.getFilesystemChangedCommand({
-      paths: [
-        '.git-info',
-        ...this.files.filter(file => file),
-      ],
+      paths,
+      tree: buildTree(paths),
     });
   }
 
@@ -42,9 +47,10 @@ export class FilesystemManager {
     return this.remoteSync.isSyncing ? 'syncing' : 'synced';
   }
 
-  constructor(server: Server, gitManager: GitManager, projectPath: string, remoteBucket: string, remotePrefix: string) {
+  constructor(server: Server, gitManager: GitManager, fileManager: FileManager, projectPath: string, remoteBucket: string, remotePrefix: string) {
     this.server = server;
     this.gitManager = gitManager;
+    this.fileManager = fileManager;
     this.projectPath = projectPath;
     this.remoteSync = new RemoteSync(projectPath, remoteBucket, remotePrefix);
 
@@ -118,6 +124,9 @@ export class FilesystemManager {
       if (rawPath.includes('.git/')) {
         this.onGitfilesChanged();
       }
+
+      // Notify the file manager
+      this.fileManager.onFileChangedOnDisk(this.getRelativePath(rawPath));
     });
 
     this.watcher.on('unlink', (rawPath: string) => {
@@ -165,6 +174,7 @@ export class FilesystemManager {
   // Remove
   async rm(path: string) {
     await rimraf(`${this.projectPath}/${path}`);
+    this.fileManager.onFileRemoved(path);
   }
 
   // Move
@@ -180,6 +190,7 @@ export class FilesystemManager {
 
     try {
       await exec(`mv ${this.projectPath}/${source} ${this.projectPath}/${destPath.join('/')}`);
+      this.fileManager.onFilesMoved(source, dest);
     } catch (err) {
       //
     }

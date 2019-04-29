@@ -52,6 +52,5 @@ jspm_packages
 dist/inc/config.dev.json
 
 # compiled files
-dist
 build
 /.idea

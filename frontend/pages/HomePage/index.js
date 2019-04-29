@@ -68,7 +68,7 @@ class HomePage extends React.PureComponent {
                 target="_blank"
                 rel="noopener noreferrer"
                 >
-                    Learn React
+                    {this.context.strings.linkText}
                 </Link>
             </Container>
         );

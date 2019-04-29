@@ -1,7 +1,7 @@
 {
   "strings": {
     "content": "Welcome to your Koji React App",
-    "learn": "Learn React"
+    "linkText": "Learn React"
   },
   "@@editor": [
     {
@@ -17,7 +17,7 @@
           "type": "text"
         },
         {
-          "key": "learn",
+          "key": "linkText",
           "name": "Link Text",
           "type": "text"
         }

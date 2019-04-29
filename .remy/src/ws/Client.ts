@@ -136,7 +136,6 @@ export class Client {
           const rmMessage = <InboundRmMessage> inboundMessage;
           if (rmMessage.rm) {
             await this.filesystemManager.rm(rmMessage.rm.path);
-            await this.fileManager.close(rmMessage.rm.path);
           }
           break;
         }

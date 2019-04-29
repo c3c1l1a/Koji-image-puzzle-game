@@ -21,8 +21,9 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 
-const kojiProjectConfig = require('../../.koji/scripts/buildConfig.js')();
+const buildConfig = require('../../.koji/scripts/buildConfig.js');
 const kojiManifest = require('../../.koji/scripts/buildManifest.js')();
 
 module.exports = {
@@ -129,10 +130,14 @@ module.exports = {
     overlay: true,
   },
   plugins: [
+    new ExtraWatchWebpackPlugin({
+      dirs: [ '../.koji' ],
+    }),
+
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        koji: kojiProjectConfig,
+        koji: webpack.DefinePlugin.runtimeValue(() => buildConfig(), ['../.koji/*']),
       },
     }),
     new ManifestPlugin({

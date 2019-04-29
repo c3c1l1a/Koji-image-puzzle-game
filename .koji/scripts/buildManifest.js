@@ -18,7 +18,7 @@ const fs = require('fs');
 
 module.exports = () => {
 
-    const { metadata } = JSON.parse(fs.readFileSync('../.koji/project/metadata.json', 'utf8'));
+    const { metadata } = JSON.parse(fs.readFileSync('../.koji/customization/metadata.json', 'utf8'));
 
     const manifest = {
         fingerprints: false, 

@@ -72,10 +72,11 @@ export class File extends BaseFile {
   }
 
   save() {
+    super.save();
+
     if (this.body === undefined) {
       return;
     }
-    this.hasUnsavedChanges = false;
     fs.writeFile(`${this.projectPath}/${this.path}`, this.body, (err) => {
       // console.log('write err', err);
     });
