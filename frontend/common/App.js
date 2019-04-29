@@ -20,9 +20,9 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import HomePage from '../pages/HomePage';
+import Router from './Router';
 import GlobalContext from './GlobalContext';
-import wrapConsole from '../koji_utilities/wrapConsole';
+import wrapConsole from 'koji_utilities/wrapConsole';
 
 const  { koji } = process.env;
 
@@ -63,7 +63,7 @@ class App extends React.PureComponent {
       <Container>
         <ThemeProvider theme={this.state.koji}>
           <GlobalContext.Provider value={this.state.koji}>
-            <HomePage />
+            <Router />
           </GlobalContext.Provider>
         </ThemeProvider>
       </Container>

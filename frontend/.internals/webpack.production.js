@@ -160,5 +160,10 @@ module.exports = {
       hashDigest: 'hex',
       hashDigestLength: 20,
     }),
-  ]
+  ],
+  resolve: {
+    modules: ['node_modules', 'frontend'],
+    extensions: ['.js', '.jsx', '.react.js'],
+    mainFields: ['browser', 'jsnext:main', 'main'],
+  }
 };

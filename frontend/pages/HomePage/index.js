@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import GlobalContext from '../../common/GlobalContext';
-import Request from '../../koji_utilities/request';
-import Routes from '../../koji_utilities/routes';
+import GlobalContext from 'common/GlobalContext';
+import Request from 'koji_utilities/request';
+import Routes from 'koji_utilities/routes';
 
 const Container = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundColor};
