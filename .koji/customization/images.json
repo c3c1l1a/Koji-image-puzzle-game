@@ -1,6 +1,6 @@
 {
   "images": {
-    "icon": "https://images.koji-cdn.com/ea549917-09af-4b57-894c-913b2d5577f2/kojireact.png"
+    "mouse": "https://images.koji-cdn.com/76a58d18-9031-4cf9-871c-b4701b0e2537/f4864534-ede5-40e9-ac53-a81df8a25d77.png"
   },
   "@@editor": [
     {
@@ -10,7 +10,7 @@
       "source": "images.json",
       "fields": [
         {
-          "key": "icon",
+          "key": "mouse",
           "name": "Icon",
           "description": "Icon that spins on the page",
           "type": "image"

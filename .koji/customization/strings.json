@@ -1,7 +1,6 @@
 {
   "strings": {
-    "content": "Welcome to your Koji React App",
-    "linkText": "Learn React"
+    "content": "Koji P5 Scaffold"
   },
   "@@editor": [
     {
@@ -14,11 +13,6 @@
           "key": "content",
           "name": "Page Content",
           "description": "The text that is displayed on the page",
-          "type": "text"
-        },
-        {
-          "key": "linkText",
-          "name": "Link Text",
           "type": "text"
         }
       ]
