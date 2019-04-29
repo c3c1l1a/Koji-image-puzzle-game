@@ -1,6 +1,6 @@
 {
   "deploy": {
-    "subdomain": "p5test.withkoji.com",
+    "subdomain": ".withkoji.com",
     "frontend": {
       "output": "frontend/build",
       "commands": [
