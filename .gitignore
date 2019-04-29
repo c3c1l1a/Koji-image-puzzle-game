@@ -1,6 +1,7 @@
 .idea/
 .vscode/
 node_modules/
+.remy/
 build
 .DS_Store
 *.tgz
