@@ -1,22 +1,23 @@
+import Koji from 'koji-tools';
 let img;
 
 function setup() {
   // make a full screen canvas
   createCanvas(window.innerWidth, window.innerHeight);
-  img = loadImage(koji.images.mouse); // Load the image
+  img = loadImage(Koji.config.images.mouse); // Load the image
 }
 
 function draw() {
   // set the background color from the configuration options
-  background(koji.colors.backgroundColor);
+  background(Koji.config.colors.backgroundColor);
 
   // format our text
   textSize(24);
-  fill(koji.colors.textColor);
+  fill(Koji.config.colors.textColor);
   textAlign(CENTER);
 
   // print out our text
-  text(koji.strings.content, window.innerWidth / 2, 100);
+  text(Koji.config.strings.content, window.innerWidth / 2, 100);
 
   // setup an image to follow our mouse
   let imageSize = 100;

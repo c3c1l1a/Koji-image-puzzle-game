@@ -11,29 +11,13 @@
  *   can go here. If you want additional CSS files you can include them
  *   here.
  */
-
+import Koji from 'koji-tools';
 import './index.css';
 import * as serviceWorker from '.internals/serviceWorker';
 import * as p5 from './p5.min.js';
-import wrapConsole from 'koji_utilities/wrapConsole';
 import App from 'pages/HomePage';
 
-const { koji } = process.env;
-window.koji = koji;
-
-wrapConsole();
-console.log('[koji] frontend started');
-
-// Wire debug hooks for theme if in development environment
-if (process.env.NODE_ENV !== 'production') {
-    window.addEventListener('message', ({ data }) => {
-        // Global context injection
-        if (data.action === 'injectGlobal') {
-            const { scope, key, value } = data.payload;
-            window.koji[scope][key] = value;
-        }
-    }, false);
-}
+Koji.pageLoad();
 
 Object.entries(App).map(([name, module]) => {
   window[name] = module;
