@@ -1,32 +1,24 @@
-import Koji from 'koji-tools';
 let img;
 
 function setup() {
   // make a full screen canvas
   createCanvas(window.innerWidth, window.innerHeight);
-  img = loadImage(Koji.config.images.mouse); // Load the image
+  img = loadImage(Koji.images.mouse); // Load the image
 }
 
 function draw() {
   // set the background color from the configuration options
-  background(Koji.config.colors.backgroundColor);
+  background(Koji.colors.backgroundColor);
 
   // format our text
   textSize(24);
-  fill(Koji.config.colors.textColor);
+  fill(Koji.colors.textColor);
   textAlign(CENTER);
 
   // print out our text
-  text(Koji.config.strings.content, window.innerWidth / 2, 100);
+  text(Koji.strings.content, window.innerWidth / 2, 100);
 
   // setup an image to follow our mouse
   let imageSize = 100;
   image(img, mouseX - (imageSize / 2), mouseY - (imageSize / 2), imageSize, imageSize);
-}
-
-
-// export our functions so p5 can find them
-export default {
-  setup,
-  draw,
 }

@@ -14,13 +14,17 @@
 import Koji from 'koji-tools';
 import './index.css';
 import * as serviceWorker from '.internals/serviceWorker';
-import App from 'pages/HomePage';
+// import App from 'pages/HomePage';
 
 Koji.pageLoad();
+window.Koji = Koji.config;
 
-Object.entries(App).map(([name, module]) => {
-  window[name] = module;
-});
+// just a little bit hacky at the moment, but gosh darn if it dont work.
+require('script-loader!pages/HomePage/index.js');
+
+// Object.entries(App).map(([name, module]) => {
+//   window[name] = module;
+// });
 
 new p5();
 // If you want your app to work offline and load faster, you can change
