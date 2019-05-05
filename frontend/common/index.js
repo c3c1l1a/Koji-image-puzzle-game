@@ -14,7 +14,6 @@
 import Koji from 'koji-tools';
 import './index.css';
 import * as serviceWorker from '.internals/serviceWorker';
-import * as p5 from './p5.min.js';
 import App from 'pages/HomePage';
 
 Koji.pageLoad();
