@@ -4,8 +4,8 @@
     "description": "A React scaffold modified specifically for Koji. Easily customizable at gokoji.com.",
     "image": "https://images.koji-cdn.com/025a4ca3-2c61-4cf2-b821-55b7023c47dc/kojireact.png",
     "icon": "https://objects.koji-cdn.com/025a4ca3-2c61-4cf2-b821-55b7023c47dc/94e432a7-951b-4b41-a726-d5d9fc66c533.ico",
-    "icon192": "https://via.placeholder.com/192",
-    "icon512": "https://via.placeholder.com/512",
+    "icon192": "",
+    "icon512": "",
     "gaCode": ""
   },
   "@@editor": [

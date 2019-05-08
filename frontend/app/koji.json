@@ -2,6 +2,6 @@
 	"pages": [{
 		"name": "HomePage",
         "route": "/",
-        "path": "frontend/pages/HomePage"
+        "path": "frontend/app"
 	}]
 }

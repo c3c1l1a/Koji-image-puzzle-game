@@ -13,21 +13,9 @@
  */
 import Koji from 'koji-tools';
 import './index.css';
-import * as serviceWorker from '.internals/serviceWorker';
-// import App from 'pages/HomePage';
 
 Koji.pageLoad();
-window.Koji = Koji.config;
+window.Koji = Koji;
 
-// just a little bit hacky at the moment, but gosh darn if it dont work.
-require('script-loader!pages/HomePage/index.js');
-
-// Object.entries(App).map(([name, module]) => {
-//   window[name] = module;
-// });
-
+require('script-loader!app/index.js');
 new p5();
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-if (process.env.NODE_ENV === 'production') serviceWorker.register();

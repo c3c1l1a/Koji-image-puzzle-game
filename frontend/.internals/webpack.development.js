@@ -19,10 +19,6 @@
 var path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-var ManifestPlugin = require('webpack-manifest-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
-
-const kojiManifest = require('../../.koji/scripts/buildManifest.js')();
 
 module.exports = {
   watch: true,
@@ -44,7 +40,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: ['@babel/preset-env']
           }
         }
       },
@@ -133,16 +129,10 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
     }),
-    new ManifestPlugin({
-      fileName: 'manifest.webmanifest',
-      basePath: '/',
-      seed: JSON.parse(kojiManifest),
-    }),
     new HtmlWebpackPlugin({
       inject: true,
       template: './common/index.html',
     }),
-    new WorkboxPlugin.GenerateSW(),
   ],
   resolve: {
     modules: ['node_modules', 'frontend'],
