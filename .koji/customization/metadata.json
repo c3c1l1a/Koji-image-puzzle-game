@@ -1,6 +1,7 @@
 {
   "metadata": {
-    "title": "Koji P5 Scaffold",
+    "name": "Koji P5 Scaffold",
+    "short_name": "P5 App",
     "description": "A React scaffold modified specifically for Koji. Easily customizable at gokoji.com.",
     "image": "https://images.koji-cdn.com/025a4ca3-2c61-4cf2-b821-55b7023c47dc/kojireact.png",
     "icon": "https://objects.koji-cdn.com/025a4ca3-2c61-4cf2-b821-55b7023c47dc/94e432a7-951b-4b41-a726-d5d9fc66c533.ico",
@@ -16,9 +17,14 @@
       "source": "metadata.json",
       "fields": [
         {
-          "key": "title",
+          "key": "name",
           "name": "Name for your App",
           "description": "Will show up as title on Google and Facebook"
+        },
+        {
+          "key": "short_name",
+          "name": "Short name for your App",
+          "description": "For PWA support, this will show up as the name of your app when installed"
         },
         {
           "key": "description",

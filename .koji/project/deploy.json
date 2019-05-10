@@ -1,6 +1,6 @@
 {
   "deploy": {
-    "subdomain": "p5pwa.withkoji.com",
+    "subdomain": ".withkoji.com",
     "frontend": {
       "output": "frontend/build",
       "commands": [
@@ -23,7 +23,7 @@
           ],
           "site": "<head>",
           "position": "after",
-          "value": "<meta property=\"og:title\" content=\"${metadata.title}\">"
+          "value": "<meta property=\"og:title\" content=\"${metadata.name}\">"
         },
         {
           "paths": [
@@ -39,7 +39,7 @@
           ],
           "site": "<head>",
           "position": "after",
-          "value": "<meta property=\"title\" content=\"${metadata.title}\">"
+          "value": "<meta property=\"title\" content=\"${metadata.name}\">"
         },
         {
           "paths": [
@@ -55,7 +55,7 @@
           ],
           "site": "<head>",
           "position": "after",
-          "value": "<title>${metadata.title}</title>"
+          "value": "<title>${metadata.name}</title>"
         },
         {
           "paths": [

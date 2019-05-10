@@ -21,6 +21,6 @@ function draw() {
   text(Koji.config.strings.content, window.innerWidth / 2, 100);
 
   // setup an image to follow our mouse
-  let imageSize = 120;
+  let imageSize = 100;
   image(img, mouseX - (imageSize / 2), mouseY - (imageSize / 2), imageSize, imageSize);
 }
