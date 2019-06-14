@@ -1,0 +1,21 @@
+{
+    "sounds": {
+      "backgroundMusic": "https://objects.koji-cdn.com/63bc2fb0-0c42-4acb-bee8-a060e9286a95/backgroundMusicSpace.mp3"
+    },
+    "@@editor": [
+      {
+        "key": "sounds",
+        "name": "Sounds",
+        "icon": "🔊️",
+        "source": "sounds.json",
+        "fields": [
+          {
+            "key": "backgroundMusic",
+            "name": "Background Music",
+            "description": "Music to loop in background",
+            "type": "sound"
+          }
+        ]
+      }
+    ]
+  }
