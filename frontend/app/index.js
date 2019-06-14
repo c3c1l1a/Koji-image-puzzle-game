@@ -43,3 +43,14 @@ function draw() {
   let imageSize = 100;
   image(img, mouseX - (imageSize / 2), mouseY - (imageSize / 2), imageSize, imageSize);
 }
+
+
+// start audio context
+function touchStarted() {
+  if (getAudioContext().state !== 'running') {
+    getAudioContext().resume();
+  }
+
+  var synth = new p5.MonoSynth();
+  synth.play('A4', 0.5, 0, 0.2);
+}
