@@ -1,10 +1,24 @@
 let img;
 let button;
+let sounds; // sounds
+
+function preload() {
+
+  // setup sounds
+  soundFormats('mp3', 'ogg');
+  sounds = {
+    backgroundMusic: loadSound(Koji.config.sounds.backgroundMusic)
+  };
+
+}
 
 function setup() {
+
   // make a full screen canvas
   createCanvas(window.innerWidth, window.innerHeight);
+
   img = loadImage(Koji.config.images.mouse); // Load the image
+
 
 }
 
@@ -19,6 +33,11 @@ function draw() {
 
   // print out our text
   text(Koji.config.strings.content, window.innerWidth / 2, 100);
+
+  // play our background music
+  if (!sounds.backgroundMusic.isPlaying()) {
+    sounds.backgroundMusic.play();
+  }
 
   // setup an image to follow our mouse
   let imageSize = 100;
