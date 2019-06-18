@@ -117,7 +117,7 @@ if (isInLambda) {
         serverlessExpress.proxy(server, event, context);
     };
 } else {
-    app.listen(3333, null, async err => {
+    app.listen(process.env.PORT, null, async err => {
     if (err) {
         console.log(err.message);
     }
