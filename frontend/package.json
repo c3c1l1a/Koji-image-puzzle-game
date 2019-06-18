@@ -10,7 +10,7 @@
     "start": "webpack-dev-server --config ./.internals/webpack.development.js --hot --inline"
   },
   "dependencies": {
-    "koji-tools": "github:madewithkoji/koji-tools"
+    "koji-tools": "^0.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
