@@ -10,13 +10,7 @@
       ]
     },
     "backend": {
-      "output": "backend/dist",
-      "type": "dynamic",
-      "commands": [
-        "cd backend",
-        "npm install",
-        "export NODE_ENV=production && npm run start"
-      ]
+      "type": "dynamic"
     }
   }
 }
