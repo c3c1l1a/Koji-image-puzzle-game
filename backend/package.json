@@ -2,9 +2,9 @@
   "name": "koji-project-backend",
   "version": "1.0.0",
   "scripts": {
-    "compile": "babel . -d dist --copy-files -s --ignore \"node_modules/**/*.js\"",
-    "start-dev": "NODE_ENV=development babel-watch -L --watch ../.koji/ index.js",
-    "start": "node ./dist"
+    "compile": "babel . -d dist --copy-files --ignore \"node_modules/**/*.js\"",
+    "start-dev": "NODE_ENV=development koji-tools watch & babel-watch -L index.js",
+    "start": "NODE_ENV=production node index.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",

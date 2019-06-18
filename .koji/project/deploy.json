@@ -10,7 +10,7 @@
       ]
     },
     "backend": {
-      "output": "frontend/dist",
+      "output": "backend/dist",
       "type": "dynamic",
       "commands": [
         "cd backend",
