@@ -107,7 +107,7 @@ Object.keys(backendConfig).forEach((routeName) => {
   }
 })
 
-app.listen(process.env.PORT, null, async err => {
+app.listen(process.env.PORT || 3333, null, async err => {
     if (err) {
         console.log(err.message);
     }
