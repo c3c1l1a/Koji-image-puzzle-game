@@ -1,21 +1,49 @@
 {
-    "sounds": {
-      "backgroundMusic": "https://objects.koji-cdn.com/63bc2fb0-0c42-4acb-bee8-a060e9286a95/backgroundMusicSpace.mp3"
-    },
-    "@@editor": [
-      {
-        "key": "sounds",
-        "name": "Sounds",
-        "icon": "🔊️",
-        "source": "sounds.json",
-        "fields": [
-          {
-            "key": "backgroundMusic",
-            "name": "Background Music",
-            "description": "Music to loop in background",
-            "type": "sound"
-          }
-        ]
-      }
-    ]
-  }
+  "sounds": {
+    "backgroundMusic": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/musicjewels.ogg",
+    "explosion": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/explosion.wav",
+    "life": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav",
+    "shield": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/shield.wav",
+    "lose": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/lose.wav"
+  },
+  "@@editor": [
+    {
+      "key": "sounds",
+      "name": "Sounds",
+      "icon": "🎵",
+      "source": "sounds.json",
+      "fields": [
+        {
+          "key": "backgroundMusic",
+          "name": "Background Music",
+          "description": "Music to loop in background",
+          "type": "sound"
+        },
+        {
+          "key": "explosion",
+          "name": "Explosion",
+          "description": "When you hit a falling object",
+          "type": "sound"
+        },
+        {
+          "key": "life",
+          "name": "Life Sound",
+          "description": "When you collect a life",
+          "type": "sound"
+        },
+        {
+          "key": "shield",
+          "name": "Shield Sound",
+          "description": "When you collect a shield",
+          "type": "sound"
+        },
+        {
+          "key": "lose",
+          "name": "Lose Sound",
+          "description": "When you lose the game",
+          "type": "sound"
+        }
+      ]
+    }
+  ]
+}

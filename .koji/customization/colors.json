@@ -1,24 +1,78 @@
 {
   "colors": {
-    "backgroundColor": "#3f62ae",
-    "textColor": "#ffffff"
+    "backgroundColor": "#020B39",
+    "textColor": "#ffffff",
+    "playButtonTextColor": "#020B39",
+    "playButtonColor": "#B7BCD8",
+    "scoreColor": "#F1C45B",
+    "highscoreColor": "#F1C45B",
+    "titleColor": "#B7BCD8",
+    "instructionsColor": "#4B59A5",
+    "playButtonHoverColor": "#4B59A5",
+    "playButtonClickColor": "#B7BCD8",
+    "lifeColor": "#A3DD53",
+    "shieldColor": "#A3DD53"
   },
   "@@editor": [
     {
       "key": "colors",
       "name": "Colors",
-      "icon": "💅",
+      "icon": "🎨",
       "source": "colors.json",
       "fields": [
         {
-          "key": "textColor",
-          "name": "Text color",
-          "description": "Default color for text",
+          "key": "backgroundColor",
+          "name": "Background color",
           "type": "color"
         },
         {
-          "key": "backgroundColor",
-          "name": "Background color",
+          "key": "titleColor",
+          "name": "Game Title Color",
+          "type": "color"
+        },
+        {
+          "key": "instructionsColor",
+          "name": "Game Instructions Color",
+          "type": "color"
+        },
+        {
+          "key": "scoreColor",
+          "name": "Score color",
+          "type": "color"
+        },
+        {
+          "key": "highscoreColor",
+          "name": "High Score color",
+          "type": "color"
+        },
+        {
+          "key": "playButtonTextColor",
+          "name": "Play Button Text Color",
+          "type": "color"
+        },
+        {
+          "key": "playButtonColor",
+          "name": "Play Button Color",
+          "type": "color"
+        },
+        {
+          "key": "playButtonHoverColor",
+          "name": "Play Button Hover Color",
+          "type": "color"
+        },
+        {
+          "key": "playButtonClickColor",
+          "name": "Play Button Click Color",
+          "type": "color"
+        },
+        {
+          "key": "lifeColor",
+          "name": "Life Text Color",
+          "type": "color"
+        },
+        {
+          "key": "shieldColor",
+          "name": "Shield Text Color",
           "type": "color"
         }
       ]

@@ -1,18 +1,88 @@
 {
   "images": {
-    "mouse": "https://images.koji-cdn.com/76a58d18-9031-4cf9-871c-b4701b0e2537/f4864534-ede5-40e9-ac53-a81df8a25d77.png"
+    "soundImage": "https://i.imgur.com/rtFppa8.png",
+    "muteImage": "https://i.imgur.com/AR7C733.png",
+    "lifeIcon": "https://i.imgur.com/SKksWaw.png",
+    "background": "",
+    "player": "https://i.imgur.com/lyXFHmB.png",
+    "enemyRegular": "https://i.imgur.com/PEIGjdy.png",
+    "enemyFast": "https://i.imgur.com/3dp1t77.png",
+    "lifeCollectible": "https://i.imgur.com/SKksWaw.png",
+    "explosion": "https://i.imgur.com/skITDhf.png",
+    "shield": "https://i.imgur.com/uaLQlp1.png",
+    "shieldCollectible": "https://i.imgur.com/uaLQlp1.png"
   },
   "@@editor": [
     {
       "key": "images",
       "name": "Images",
-      "icon": "🖼️",
+      "icon": "💪🏻",
       "source": "images.json",
       "fields": [
         {
-          "key": "mouse",
-          "name": "Icon",
-          "description": "Icon that spins on the page",
+          "key": "soundImage",
+          "name": "Sound Icon",
+          "description": "Ideal size: 32x32",
+          "type": "image"
+        },
+        {
+          "key": "muteImage",
+          "name": "Mute Icon",
+          "description": "Ideal size: 32x32",
+          "type": "image"
+        },
+        {
+          "key": "lifeIcon",
+          "name": "Life Icon",
+          "description": "Ideal size: 96x96",
+          "type": "image"
+        },
+        {
+          "key": "background",
+          "name": "Background",
+          "description": "Leave empty if you want to use a solid color. Ideal size: any, but keep in mind it could deform based on screen size",
+          "type": "image"
+        },
+        {
+          "key": "player",
+          "name": "Player",
+          "description": "Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "enemyRegular",
+          "name": "Regular Enemy",
+          "description": "Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "enemyFast",
+          "name": "Fast Enemy",
+          "description": "Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "shield",
+          "name": "Shield",
+          "description": "Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "explosion",
+          "name": "Explosion",
+          "description": "Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "lifeCollectible",
+          "name": "Life Collectible",
+          "description": "Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "shieldCollectible",
+          "name": "Shield Collectible",
+          "description": "Ideal size: 128x128",
           "type": "image"
         }
       ]
