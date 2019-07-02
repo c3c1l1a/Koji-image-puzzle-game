@@ -1,10 +1,10 @@
 {
   "strings": {
     "fontFamily": "https://fonts.googleapis.com/css?family=Wendy+One",
-    "title": "Dodge Game",
+    "title": "Dodge Them All!",
     "instructions1": "DRAG or ARROW KEYS to move",
     "instructions2": "Avoid incoming piggies",
-    "instructions3": "Collect powerups",
+    "instructions3": "Collect powerups to survive longer!",
     "gameOverText": "GAME OVER",
     "highScoreText": "High Score:",
     "playButtonText": "PLAY NOW",
