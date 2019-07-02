@@ -172,7 +172,7 @@ function setup() {
     gameBeginning = true;
 
     //Remove comment if you want the music to start
-    //playMusic();
+    playMusic();
 
 
     spawnStarStart();
