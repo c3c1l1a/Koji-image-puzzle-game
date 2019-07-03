@@ -27,7 +27,7 @@ function disableSound() {
 
 function enableSound() {
     soundEnabled = true;
-    getAudioContext().suspend();
+    getAudioContext().resume();
 }
 
 //Call this function on sound button click
