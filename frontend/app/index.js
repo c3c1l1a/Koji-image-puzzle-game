@@ -301,7 +301,7 @@ function draw() {
 
                 sndExplosion.setVolume(0.2); //too loud if default
                 sndExplosion.play();
-                
+
 
                 if (player.shieldTimer <= 0) {
                     loseLife();
@@ -511,6 +511,14 @@ function touchStarted() {
 
 function touchEnded() {
     touching = false;
+
+    //===This is required to fix a problem where the music sometimes doesn't start on mobile
+    if (soundEnabled) {
+        if (getAudioContext().state !== 'running') {
+            getAudioContext().resume();
+        }
+    }
+
 }
 
 function keyPressed() {

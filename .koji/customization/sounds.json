@@ -1,6 +1,6 @@
 {
   "sounds": {
-    "backgroundMusic": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/musicjewels.ogg",
+    "backgroundMusic": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/musicjewels.mp3",
     "explosion": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/explosion.wav",
     "life": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav",
     "shield": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/shield.wav",

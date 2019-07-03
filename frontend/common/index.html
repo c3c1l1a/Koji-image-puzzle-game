@@ -35,33 +35,23 @@
 
 	</script>
 	<!-- End P5 Library Section -->
+
 </head>
 
 <!--Disable touch zooming, mobile scrolling, and right click on desktop-->
-<body style="touch-action: none; overflow: hidden; overscroll-behavior-y: contain; position: fixed;" oncontextmenu="return false">
+
+<body id="root" style="touch-action: none; overflow: hidden; overscroll-behavior-y: contain; position: fixed;" oncontextmenu="return false">
 	<noscript>You need to enable JavaScript to run this app.</noscript>
-	
-  <script>
-  function preventPullToRefresh(element) {
-    var prevent = false;
 
-    document.querySelector(element).addEventListener('touchstart', function(e){
-      if (e.touches.length !== 1) { return; }
-
-      var scrollY = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
-      prevent = (scrollY === 0);
-    });
-
-    document.querySelector(element).addEventListener('touchmove', function(e){
-      if (prevent) {
-        prevent = false;
-        e.preventDefault();
-      }
-    });
-  }
-
-  preventPullToRefresh('html') // pass #id or html tag into the method
-</script>
 </body>
+
+<footer>
+	<!-- Prevent mobile scrolling/refreshing -->
+	<script>
+		document.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+    }, { passive: false });
+	</script>
+</footer>
 
 </html>
