@@ -11,14 +11,6 @@ function checkHighscore() {
     }
 }
 
-//===Used for playing any sound
-function PlaySound(audio, loop) {
-    if (soundEnabled) {
-        audio.loop = loop;
-        audio.play();
-    }
-}
-
 function playMusic() {
     if (sndMusic) {
         sndMusic.setVolume(0.4);
@@ -28,16 +20,14 @@ function playMusic() {
 }
 
 function disableSound() {
-    if (sndMusic) {
-        sndMusic.pause();
-    }
+    getAudioContext().suspend();
 
     soundEnabled = false;
 }
 
 function enableSound() {
     soundEnabled = true;
-    playMusic();
+    getAudioContext().suspend();
 }
 
 //Call this function on sound button click

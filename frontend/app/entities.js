@@ -231,13 +231,7 @@ class Collectible extends Moveable {
         //Same speed calculation as with enemies
         this.moveSpeed = objSize * enemyAverageSpeed * 0.01 * random(0.75, 1.25);
 
-        if (this.type == 0) {
-            this.img = imgLife;
-        }
-        if (this.type == 1) {
-            this.img = imgShield;
-        }
-
+        this.img = imgCollectible[this.type];
         this.sizeMod = 1.5;
         this.velocity.y = this.moveSpeed;
         this.collided = false;

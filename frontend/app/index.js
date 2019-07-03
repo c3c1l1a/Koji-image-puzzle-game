@@ -300,7 +300,8 @@ function draw() {
                 enemies[i].collided = true;
 
                 sndExplosion.setVolume(0.2); //too loud if default
-                PlaySound(sndExplosion);
+                sndExplosion.play();
+                
 
                 if (player.shieldTimer <= 0) {
                     loseLife();
@@ -329,7 +330,7 @@ function draw() {
                 if (collectibles[i].type == 1) {
                     player.shieldTimer = shieldDuration;
 
-                    PlaySound(sndShield);
+                    sndShield.play();
                 }
             }
         }
@@ -573,7 +574,7 @@ function loseLife() {
         gameOver = true;
         checkHighscore();
 
-        PlaySound(sndLose);
+        sndLose.play();
     }
 }
 
@@ -585,7 +586,7 @@ function addLife() {
         score += scoreGain;
     }
 
-    PlaySound(sndLife);
+    sndLife.play();
 }
 
 
