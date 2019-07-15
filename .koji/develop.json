@@ -10,15 +10,6 @@
         "build-error": "[webpack] Frontend build error"
       },
       "startCommand": "npm start"
-    },
-    "backend": {
-        "path": "backend",
-        "port": 3333,
-        "startCommand": "npm run start-dev",
-        "events": {
-            "started": "[koji] backend started",
-            "log": "[koji-log]"
-        }
     }
   }
 }
