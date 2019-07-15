@@ -1,17 +1,18 @@
 {
   "colors": {
-    "backgroundColor": "#020B39",
+    "backgroundColor": "#0a0a31",
     "textColor": "#ffffff",
-    "playButtonTextColor": "#020B39",
-    "playButtonColor": "#B7BCD8",
-    "scoreColor": "#F1C45B",
-    "highscoreColor": "#F1C45B",
-    "titleColor": "#B7BCD8",
-    "instructionsColor": "#4B59A5",
-    "playButtonHoverColor": "#4B59A5",
-    "playButtonClickColor": "#B7BCD8",
-    "lifeColor": "#B31158",
-    "shieldColor": "#A3DD53"
+    "playButtonTextColor": "#0a0a31",
+    "playButtonColor": "#ffda5a",
+    "scoreColor": "#ffda5a",
+    "highscoreColor": "#ffda5a",
+    "titleColor": "#ffda5a",
+    "instructionsColor": "#dfdcea",
+    "playButtonHoverColor": "#E8C034",
+    "playButtonClickColor": "#ffda5a",
+    "lifeColor": "#FF6D5A",
+    "weaponColor": "#ffda5a",
+    "enemyNumberColor": "#ffffff"
   },
   "@@editor": [
     {
@@ -71,8 +72,13 @@
           "type": "color"
         },
         {
-          "key": "shieldColor",
-          "name": "Shield Text Color",
+          "key": "weaponColor",
+          "name": "Weapon Text Color",
+          "type": "color"
+        },
+        {
+          "key": "enemyNumberColor",
+          "name": "Enemy Number Color",
           "type": "color"
         }
       ]

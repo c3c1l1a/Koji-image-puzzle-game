@@ -4,13 +4,19 @@
     "muteImage": "https://i.imgur.com/AR7C733.png",
     "lifeIcon": "https://i.imgur.com/n0ApXO9.png",
     "background": "",
-    "player": "https://i.imgur.com/lyXFHmB.png",
-    "enemyRegular": "https://i.imgur.com/PEIGjdy.png",
-    "enemyFast": "https://i.imgur.com/3dp1t77.png",
+    "player": "https://i.imgur.com/uDTjMb3.png",
+    "enemy1": "https://i.imgur.com/SYJ36ou.png",
     "lifeCollectible": "https://i.imgur.com/SKksWaw.png",
-    "explosion": "https://i.imgur.com/skITDhf.png",
+    "explosion": "https://i.imgur.com/QT2LYN4.png",
     "shield": "https://i.imgur.com/uaLQlp1.png",
-    "shieldCollectible": "https://i.imgur.com/uaLQlp1.png"
+    "shieldCollectible": "https://i.imgur.com/uaLQlp1.png",
+    "projectile": "https://i.imgur.com/BborCg2.png",
+    "weaponCollectible": "https://i.imgur.com/UMMhHrf.png",
+    "enemy2": "https://i.imgur.com/R6kLkgY.png",
+    "enemy3": "https://i.imgur.com/N6nYTRL.png",
+    "enemy4": "https://i.imgur.com/WKAM0ZV.png",
+    "enemy5": "https://i.imgur.com/IaI0zLb.png",
+    "enemy6": "https://i.imgur.com/tFhnq93.png"
   },
   "@@editor": [
     {
@@ -46,25 +52,43 @@
         {
           "key": "player",
           "name": "Player",
-          "description": "Ideal size: 128x128",
+          "description": "Ideal canvas size: 192x192",
           "type": "image"
         },
         {
-          "key": "enemyRegular",
-          "name": "Regular Enemy",
-          "description": "Ideal size: 128x128",
+          "key": "enemy1",
+          "name": "Enemy 1",
+          "description": "Enemy image for number 1. Ideal size: 128x128",
           "type": "image"
         },
         {
-          "key": "enemyFast",
-          "name": "Fast Enemy",
-          "description": "Ideal size: 128x128",
+          "key": "enemy2",
+          "name": "Enemy 2",
+          "description": "Enemy image for number 2. Ideal size: 128x128",
           "type": "image"
         },
         {
-          "key": "shield",
-          "name": "Shield",
-          "description": "Ideal size: 128x128",
+          "key": "enemy3",
+          "name": "Enemy 3",
+          "description": "Enemy image for numbers 3-5. Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "enemy4",
+          "name": "Enemy 4",
+          "description": "Enemy image for numbers 6-10. Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "enemy5",
+          "name": "Enemy 5",
+          "description": "Enemy image for numbers 11-50. Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "enemy6",
+          "name": "Enemy 6",
+          "description": "Enemy image for numbers 51+. Ideal size: 128x128",
           "type": "image"
         },
         {
@@ -80,8 +104,14 @@
           "type": "image"
         },
         {
-          "key": "shieldCollectible",
-          "name": "Shield Collectible",
+          "key": "weaponCollectible",
+          "name": "Weapon Collectible",
+          "description": "Ideal size: 128x128",
+          "type": "image"
+        },
+        {
+          "key": "projectile",
+          "name": "Projectile",
           "description": "Ideal size: 128x128",
           "type": "image"
         }

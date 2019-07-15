@@ -10,6 +10,7 @@ let enemies = [];
 let stars = [];
 let collectibles = [];
 let explosions = [];
+let projectiles = [];
 
 //===Buttons
 let playButton;
@@ -27,15 +28,21 @@ let startingLives;
 let maxLives;
 let lives;
 let enemySpawnFrequency;
-let fastEnemySpawnFrequency;
+let strongEnemySpawnFrequency;
 let lifeSpawnFrequency;
-let shieldSpawnFrequency;
+let weaponSpawnFrequency;
+
 let enemyAverageSpeed;
 let starCount;
 let drawBackgroundStars;
 let scoreGain;
-let shieldDuration;
+
 let enemyDestroyScoreModifier;
+
+let fireCooldown;
+
+//How much space the number is occupying relative to the enemy image (in percent)
+let enemyNumberSize = 75;
 
 //===Images
 let imgLife;
@@ -43,14 +50,14 @@ let imgBackground;
 let imgPlayer;
 let imgExplosion;
 let imgCollectible = [];
-let imgShield;
 let imgEnemy = [];
+let imgProjectile;
 
 
 //===Audio
 let sndMusic;
 let sndExplosion;
-let sndShield;
+
 let sndLife;
 let sndLose;
 
@@ -69,9 +76,6 @@ let objSize; //base size modifier of all objects, calculated based on screen siz
 let gameSize = 18;
 let gameWidth;
 
-//Coordinates of left and right sides of the game view
-let leftX, rightX;
-
 let isMobile = false;
 let touching = false; //Whether the user is currently touching/clicking
 
@@ -79,6 +83,7 @@ let touchCurrentX = 0;
 let touchStartX = 0;
 let usingKeyboard = false;
 let timeElapsed = 0;
+
 
 
 //===This function is called before starting the game
@@ -104,10 +109,15 @@ function preload() {
     imgPlayer = loadImage(Koji.config.images.player);
     imgExplosion = loadImage(Koji.config.images.explosion);
     imgCollectible[0] = loadImage(Koji.config.images.lifeCollectible);
-    imgCollectible[1] = loadImage(Koji.config.images.shieldCollectible);
-    imgShield = loadImage(Koji.config.images.shield);
-    imgEnemy[0] = loadImage(Koji.config.images.enemyRegular);
-    imgEnemy[1] = loadImage(Koji.config.images.enemyFast);
+    imgCollectible[1] = loadImage(Koji.config.images.weaponCollectible);
+
+    imgEnemy[0] = loadImage(Koji.config.images.enemy1);
+    imgEnemy[1] = loadImage(Koji.config.images.enemy2);
+    imgEnemy[2] = loadImage(Koji.config.images.enemy3);
+    imgEnemy[3] = loadImage(Koji.config.images.enemy4);
+    imgEnemy[4] = loadImage(Koji.config.images.enemy5);
+    imgEnemy[5] = loadImage(Koji.config.images.enemy6);
+    imgProjectile = loadImage(Koji.config.images.projectile);
 
     soundImage = loadImage(Koji.config.images.soundImage);
     muteImage = loadImage(Koji.config.images.muteImage);
@@ -115,7 +125,6 @@ function preload() {
     //===Load Sounds
     sndMusic = loadSound(Koji.config.sounds.backgroundMusic);
     sndExplosion = loadSound(Koji.config.sounds.explosion);
-    sndShield = loadSound(Koji.config.sounds.shield);
     sndLife = loadSound(Koji.config.sounds.life);
     sndLose = loadSound(Koji.config.sounds.lose);
 
@@ -126,15 +135,18 @@ function preload() {
     maxLives = parseInt(Koji.config.strings.maxLives);
 
     enemySpawnFrequency = parseInt(Koji.config.strings.enemySpawnFrequency);
-    fastEnemySpawnFrequency = parseInt(Koji.config.strings.fastEnemySpawnFrequency);
     lifeSpawnFrequency = parseInt(Koji.config.strings.lifeSpawnFrequency);
-    shieldSpawnFrequency = parseInt(Koji.config.strings.shieldSpawnFrequency);
+    weaponSpawnFrequency = parseInt(Koji.config.strings.weaponSpawnFrequency);
+    strongEnemySpawnFrequency = parseInt(Koji.config.strings.strongEnemySpawnFrequency);
+
     enemyAverageSpeed = parseInt(Koji.config.strings.enemyAverageSpeed);
     starCount = parseInt(Koji.config.strings.starCount);
     drawBackgroundStars = Koji.config.strings.drawBackgroundStars;
     scoreGain = parseInt(Koji.config.strings.scoreGain);
-    shieldDuration = parseInt(Koji.config.strings.shieldDuration) / 1000;
+
     enemyDestroyScoreModifier = parseInt(Koji.config.strings.enemyDestroyScoreModifier);
+
+    fireCooldown = 0.25;
 
 }
 function setup() {
@@ -142,15 +154,13 @@ function setup() {
     height = window.innerHeight;
 
     //===How much of the screen should the game take, this should usually be left as it is
-    let sizeModifier = 0.85;
+    let sizeModifier = 0.65;
     if (height > width) {
         sizeModifier = 1;
     }
 
     //Get the lower one, used for centering the game
     gameWidth = min(width, height);
-    leftX = width / 2 - gameWidth / 2;
-    rightX = width / 2 + gameWidth / 2;
 
     createCanvas(width, height);
 
@@ -172,7 +182,7 @@ function setup() {
     gameBeginning = true;
 
     //Remove comment if you want the music to start
-    playMusic();
+    //playMusic();
 
 
     spawnStarStart();
@@ -303,13 +313,9 @@ function draw() {
                 sndExplosion.play();
 
 
-                if (player.shieldTimer <= 0) {
-                    loseLife();
-                } else {
-                    let gain = scoreGain * enemyDestroyScoreModifier;
-                    score += gain;
-                    floatingTexts.push(new FloatingText(enemies[i].pos.x, enemies[i].pos.y, "+" + gain, Koji.config.colors.scoreColor, objSize));
-                }
+
+                loseLife();
+
 
                 player.pos.y += objSize;
             }
@@ -327,10 +333,37 @@ function draw() {
                 if (collectibles[i].type == 0) {
                     addLife();
                 }
-                if (collectibles[i].type == 1) {
-                    player.shieldTimer = shieldDuration;
 
-                    sndShield.play();
+                if (collectibles[i].type == 1) {
+                    player.upgradeWeapon();
+                    score += scoreGain;
+                }
+
+            }
+        }
+
+        for (let i = 0; i < projectiles.length; i++) {
+            projectiles[i].update();
+            projectiles[i].render();
+
+            for (let j = 0; j < enemies.length; j++) {
+                if (!projectiles[i].collided && projectiles[i].collisionWith(enemies[j])) {
+                    projectiles[i].collided = true;
+                    projectiles[i].removable = true;
+
+                    enemies[j].lives--;
+
+                    if (enemies[j].lives > 0) {
+
+
+
+                        enemies[j].sizeMod = enemies[j].defaultSize * 1.3;
+
+                        //Slow it down a little bit
+                        enemies[j].velocity.y = -enemies[j].defaultVelocity / 6;
+                    } else {
+                        enemies[j].destroyed = true;
+                    }
                 }
             }
         }
@@ -339,6 +372,8 @@ function draw() {
             explosions[i].update();
             explosions[i].render();
         }
+
+
 
         //===Update all floating text objects
         for (let i = 0; i < floatingTexts.length; i++) {
@@ -349,7 +384,7 @@ function draw() {
         //===Ingame UI
 
         //===Score draw
-        let scoreX = rightX - objSize / 2;
+        let scoreX = width - objSize / 2;
         let scoreY = objSize / 3;
         textSize(objSize);
         fill(Koji.config.colors.scoreColor);
@@ -359,18 +394,10 @@ function draw() {
         //Lives draw
         let lifeSize = objSize;
         for (let i = 0; i < lives; i++) {
-            image(imgLife, leftX + lifeSize / 2 + lifeSize * i, lifeSize / 2, lifeSize, lifeSize);
+            image(imgLife, lifeSize / 2 + lifeSize * i, lifeSize / 2, lifeSize, lifeSize);
         }
 
         cleanup();
-    }
-
-    //Draw black bars if needed
-    if (width > height) {
-        noStroke();
-        fill(0);
-        rect(0, 0, leftX, height);
-        rect(rightX, 0, width / 2 - gameWidth / 2, height);
     }
 
     soundButton.render();
@@ -392,17 +419,28 @@ function cleanup() {
             //explosion
             let x = (player.pos.x + enemies[i].pos.x) / 2;
             let y = (player.pos.y + enemies[i].pos.y) / 2;
-            explosions.push(new Explosion(x, y));
-        } else {
-            //Get score when an enemy disappears
-            if (enemies[i].removable) {
-                score += scoreGain;
-                checkHighscore();
-            }
+            let explosion = new Explosion(x, y)
+            explosions.push(explosion);
         }
 
-        if (enemies[i].removable) {
+        //Get score when an enemy is destroyed
+        if (enemies[i].destroyed) {
+            score += enemies[i].startingLives;
+            checkHighscore();
+
+            //explosion
+            let x = enemies[i].pos.x;
+            let y = enemies[i].pos.y;
+            let explosion = new Explosion(x, y)
+            explosion.maxSize *= 2;
+            explosions.push(explosion);
+      
+        }
+
+        if (enemies[i].removable || enemies[i].destroyed) {
             enemies.splice(i, 1);
+        } else {
+            enemies[i].assignImage();
         }
     }
 
@@ -417,9 +455,10 @@ function cleanup() {
                 color = Koji.config.colors.lifeColor;
             }
             if (collectibles[i].type == 1) {
-                txt = Koji.config.strings.shieldText;
-                color = Koji.config.colors.shieldColor;
+                txt = Koji.config.strings.weaponText;
+                color = Koji.config.colors.weaponColor;
             }
+
             floatingTexts.push(new FloatingText(collectibles[i].pos.x, collectibles[i].pos.y, txt, color, objSize));
         }
 
@@ -434,51 +473,73 @@ function cleanup() {
         }
     }
 
+    for (let i = 0; i < projectiles.length; i++) {
+        if (projectiles[i].collided) {
+            explosions.push(new Explosion(projectiles[i].pos.x, projectiles[i].pos.y));
+        }
+        if (projectiles[i].removable) {
+            projectiles.splice(i, 1);
+        }
+    }
+
 }
 
 function checkEnemySpawn() {
 
     if (timeElapsed > 1) {
         if (enemies.length < 5) {
-            spawnEnemy(0);
+            spawnEnemy();
         }
 
-        //roll for ordinary
+        //roll for enemy
         let roll = random() * 100;
         if (roll < enemySpawnFrequency * 0.05) {
-            spawnEnemy(0);
+            spawnEnemy();
         }
 
-        //roll for fast
-        roll = random() * 100;
-        if (roll < fastEnemySpawnFrequency * 0.05) {
-            spawnEnemy(1);
-        }
         //roll for life
         roll = random() * 100;
         if (roll < lifeSpawnFrequency * 0.05) {
             spawnLife();
         }
 
-        //roll for shield
+        //roll for life
         roll = random() * 100;
-        if (roll < shieldSpawnFrequency * 0.05) {
-            spawnShield();
+        if (roll < weaponSpawnFrequency * 0.05) {
+            spawnWeapon();
         }
+
+
     }
 }
 
-function spawnEnemy(type) {
-    enemies.push(new Enemy(random(leftX + objSize, rightX - objSize), -objSize, type));
+function spawnEnemy() {
+    let enemy = new Enemy(random(objSize, width - objSize), -objSize * 3);
+    enemy.lives = floor(random() * 10);
+
+    //Roll for strong enemy
+    let roll = random() * 100;
+    if (roll < strongEnemySpawnFrequency * 0.5) {
+        enemy.lives = floor(random(40, 65));
+    }
+
+    enemy.startingLives = enemy.lives;
+    enemy.assignImage();
+
+    enemies.push(enemy);
+
 }
 
 function spawnLife() {
-    collectibles.push(new Collectible(random(leftX + objSize, rightX - objSize), -objSize, 0));
+    collectibles.push(new Collectible(random(objSize, width - objSize), -objSize, 0));
 }
 
-function spawnShield() {
-    collectibles.push(new Collectible(random(leftX + objSize, rightX - objSize), -objSize, 1));
+
+function spawnWeapon() {
+    collectibles.push(new Collectible(random(objSize, width - objSize), -objSize, 1));
 }
+
+
 
 
 //===Spawn stars across the screen
@@ -533,7 +594,6 @@ function keyPressed() {
             }
         }
 
-        console.log("dsfd");
     }
 
     usingKeyboard = true;
@@ -566,8 +626,10 @@ function init() {
     explosions = [];
     collectibles = [];
     enemies = [];
+    projectiles = [];
 
-    player = new Player(width / 2, height * 0.66);
+
+    player = new Player(width / 2, height * 0.8);
 
     timeElapsed = 0;
 
@@ -577,6 +639,8 @@ function init() {
 function loseLife() {
 
     lives--;
+
+    player.loseUpgrade();
 
     if (lives <= 0) {
         gameOver = true;

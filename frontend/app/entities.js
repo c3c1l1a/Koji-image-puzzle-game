@@ -81,15 +81,25 @@ class Player extends Moveable {
         this.sizeMod = 1.75;
         this.moveDir = 0;
         this.startY = this.pos.y;
-        this.shieldTimer = 0;
-        this.maxShieldSize = objSize * this.sizeMod * 1.2;
-        this.shieldSize = 0.1;
+
+
+        this.fireTimer = fireCooldown;
+
+        this.weaponLevel = 1;
+
+        this.maxWeaponLevel = 6;
     }
 
     update() {
         super.update();
 
-        this.shieldTimer -= 1 / frameRate();
+
+        this.fireTimer -= 1 / frameRate();
+
+        if (this.fireTimer <= 0) {
+            this.fire();
+            this.fireTimer = fireCooldown;
+        }
 
         //Move logic
         if (touching) {
@@ -114,59 +124,163 @@ class Player extends Moveable {
         this.pos.y = Smooth(this.pos.y, this.startY, 8);
 
         //Limit X position inside bounds
-        this.pos.x = constrain(this.pos.x, leftX + objSize, rightX - objSize);
+        this.pos.x = constrain(this.pos.x, objSize, width - objSize);
     }
 
-    render() {
-        super.render();
+    upgradeWeapon() {
+        if (this.weaponLevel < this.maxWeaponLevel) {
+            this.weaponLevel++;
+        }
+    }
 
-        //Shrink and grow shield when needed
-        if (this.shieldTimer > 0) {
-            if (this.shieldTimer > 0.3) {
-                this.shieldSize = Smooth(this.shieldSize, this.maxShieldSize, 4);
-            } else {
-                this.shieldSize = Smooth(this.shieldSize, 0.1, 4);
-            }
+    loseUpgrade() {
+        if (this.weaponLevel > 1) {
+            this.weaponLevel = floor(this.weaponLevel / 2);
+        }
+    }
 
-            let size = this.shieldSize;
+    fire() {
 
-            push();
-            translate(this.pos.x, this.pos.y);
-            rotate(this.rotation);
-            scale(this.scale.x, this.scale.y);
-            image(imgShield, -size / 2, -size / 2, size, size);
-            pop();
+        let projectileSpeed = -objSize * 0.6;
+        let projectileY = this.pos.y - objSize * this.sizeMod / 4;
+
+        if (this.weaponLevel == 1) {
+            projectiles.push(new Projectile(this.pos.x, projectileY, 0, projectileSpeed));
+        } else if (this.weaponLevel == 2) {
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 4, projectileY, 0, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 4, projectileY, 0, projectileSpeed));
+        } else if (this.weaponLevel == 3) {
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 3, projectileY + objSize, 0, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x, projectileY, 0, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 3, projectileY + objSize, 0, projectileSpeed));
+        } else if (this.weaponLevel == 4) {
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 3, projectileY + objSize, -objSize * 0.04, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 4, projectileY, 0, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 4, projectileY, 0, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 3, projectileY + objSize, objSize * 0.04, projectileSpeed));
+        } else if (this.weaponLevel == 5) {
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 2, projectileY + objSize * 2, -objSize * 0.06, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 3, projectileY + objSize, -objSize * 0.04, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 4, projectileY, 0, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 4, projectileY, 0, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 3, projectileY + objSize, objSize * 0.04, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 2, projectileY + objSize * 2, objSize * 0.06, projectileSpeed));
+        } else if (this.weaponLevel == 6) {
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 2, projectileY + objSize * 2, -objSize * 0.06, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 3, projectileY + objSize, -objSize * 0.04, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x - objSize * this.sizeMod / 4, projectileY + objSize * 0.5, -objSize * 0.02, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x, projectileY, 0, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 4, projectileY + objSize * 0.5, objSize * 0.02, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 3, projectileY + objSize, objSize * 0.04, projectileSpeed));
+            projectiles.push(new Projectile(this.pos.x + objSize * this.sizeMod / 2, projectileY + objSize * 2, objSize * 0.06, projectileSpeed));
+        }
+
+
+        this.pos.y = this.startY + objSize / 2;
+    }
+}
+
+class Projectile extends Moveable {
+    constructor(x, y, xVel, yVel) {
+        super(x, y);
+        this.velocity.x = xVel;
+        this.velocity.y = yVel;
+
+        this.img = imgProjectile;
+        this.maxSize = 0.75;
+        this.sizeMod = 0.01;
+
+        this.collided = false;
+
+    }
+
+    update() {
+        super.update();
+
+        this.sizeMod = Smooth(this.sizeMod, this.maxSize, 2);
+
+        if (this.pos.y < -objSize) {
+            this.removable = true;
         }
     }
 }
 
 class Enemy extends Moveable {
-    constructor(x, y, type) {
+    constructor(x, y) {
         super(x, y);
 
-        this.type = type;
         //Calculate random speed based on average speed
         this.moveSpeed = objSize * enemyAverageSpeed * 0.01 * random(0.75, 1.25);
-        this.img = imgEnemy[type];
+        this.img = imgEnemy[0];
 
-        this.sizeMod = random(1.25, 2);
+        this.sizeMod = 4;
+        this.defaultSize = this.sizeMod;
+
         if (this.type == 1) {
             this.moveSpeed *= 1.5;
             this.sizeMod *= 0.75;
         }
 
         this.velocity.y = this.moveSpeed;
+        this.defaultVelocity = this.velocity.y;
+
         this.collided = false;
-        this.rotation = random() * Math.PI;
+        this.destroyed = false;
+
+        this.lives = 1;
+        this.startingLives = 1;
+
     }
 
     update() {
         super.update();
         this.pos.x = constrain(this.pos.x, objSize, width - objSize);
 
+        this.sizeMod = Smooth(this.sizeMod, this.defaultSize, 4);
+        this.velocity.y = Smooth(this.velocity.y, this.defaultVelocity, 3);
+
+
         //remove if below screen
         if (this.pos.y > height + objSize * 2) {
             this.removable = true;
+        }
+
+        if (this.lives <= 0) {
+            this.lives = 0;
+
+            this.removable = true;
+        }
+    }
+
+    assignImage() {
+        if (this.lives == 1) {
+            this.img = imgEnemy[0];
+        }
+        if (this.lives == 2) {
+            this.img = imgEnemy[1];
+        }
+        if (this.lives > 2) {
+            this.img = imgEnemy[2];
+        }
+        if (this.lives > 5) {
+            this.img = imgEnemy[3];
+        }
+        if (this.lives > 10) {
+            this.img = imgEnemy[4];
+        }
+        if (this.lives > 50) {
+            this.img = imgEnemy[4];
+        }
+    }
+
+    render() {
+        super.render();
+
+        if (this.lives > 0) {
+            textSize(this.sizeMod * objSize * enemyNumberSize / 100);
+            fill(Koji.config.colors.enemyNumberColor);
+            textAlign(CENTER, CENTER);
+            text(this.lives, this.pos.x, this.pos.y);
         }
     }
 }
@@ -208,7 +322,7 @@ class Star extends Moveable {
 
         if (this.pos.y > height) {
             this.pos.y = -objSize;
-            this.pos.x = random(leftX, rightX);
+            this.pos.x = random(0, width);
         }
     }
 

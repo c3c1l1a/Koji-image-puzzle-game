@@ -1,10 +1,10 @@
 {
   "strings": {
-    "fontFamily": "https://fonts.googleapis.com/css?family=Wendy+One",
-    "title": "Dodge Them All!",
+    "fontFamily": "https://fonts.googleapis.com/css?family=Squada+One",
+    "title": "Space Blast",
     "instructions1": "DRAG or ARROW KEYS to move",
-    "instructions2": "Avoid incoming piggies",
-    "instructions3": "Collect powerups to survive longer!",
+    "instructions2": "Collect upgrades",
+    "instructions3": "Blast your way through everything!",
     "gameOverText": "GAME OVER",
     "highScoreText": "High Score:",
     "playButtonText": "PLAY NOW",
@@ -14,18 +14,19 @@
     "health": "3",
     "lives": "3",
     "lifeText": "+LIFE",
-    "shieldText": "SHIELD",
-    "enemySpawnFrequency": "140",
-    "fastEnemySpawnFrequency": "20",
-    "lifeSpawnFrequency": "2",
+    "weaponText": "FIREPOWER",
+    "enemySpawnFrequency": "40",
+    "strongEnemySpawnFrequency": "30",
+    "lifeSpawnFrequency": "1",
     "shieldSpawnFrequency": "3",
     "enemyAverageSpeed": "20",
     "drawBackgroundStars": true,
     "starCount": "100",
-    "scoreGain": "1",
+    "scoreGain": "5",
     "enemyDestroyScoreModifier": "3",
     "shieldDuration": "4000",
-    "maxLives": "5"
+    "maxLives": "5",
+    "weaponSpawnFrequency": "2"
   },
   "@@editor": [
     {
@@ -92,9 +93,9 @@
           "type": "text"
         },
         {
-          "key": "shieldText",
-          "name": "Shield Text",
-          "description": "When you collect a shield",
+          "key": "weaponText",
+          "name": "Weapon Text",
+          "description": "When you collect a weapon",
           "type": "text"
         },
         {
@@ -116,9 +117,9 @@
           "type": "text"
         },
         {
-          "key": "fastEnemySpawnFrequency",
-          "name": "Fast Enemy Spawn Frequency",
-          "description": "How often fast enemies will spawn (Integer)",
+          "key": "strongEnemySpawnFrequency",
+          "name": "Strong Enemy Spawn Frequency",
+          "description": "How often strong enemies will spawn (Integer)",
           "type": "text"
         },
         {
@@ -128,9 +129,9 @@
           "type": "text"
         },
         {
-          "key": "shieldSpawnFrequency",
-          "name": "Shield Spawn Frequency",
-          "description": "How often shield collectibles will spawn (Integer)",
+          "key": "weaponSpawnFrequency",
+          "name": "Weapon Spawn Frequency",
+          "description": "How often weapon collectibles will spawn (Integer)",
           "type": "text"
         },
         {
@@ -154,7 +155,7 @@
         {
           "key": "scoreGain",
           "name": "Score Gain",
-          "description": "How many points you get after each enemy passes through the bottom (Integer)",
+          "description": "How many points you get for collectibles (Integer)",
           "type": "text"
         },
         {
