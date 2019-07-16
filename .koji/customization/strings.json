@@ -2,8 +2,8 @@
   "strings": {
     "fontFamily": "https://fonts.googleapis.com/css?family=Squada+One",
     "title": "Space Blast",
-    "instructions1": "DRAG or ARROW KEYS to move",
-    "instructions2": "Collect upgrades",
+    "instructions1": "TOUCH or ARROW KEYS to move",
+    "instructions2": "Collect upgrades to increase firepower!",
     "instructions3": "Blast your way through everything!",
     "gameOverText": "GAME OVER",
     "highScoreText": "High Score:",
@@ -26,7 +26,10 @@
     "enemyDestroyScoreModifier": "3",
     "shieldDuration": "4000",
     "maxLives": "5",
-    "weaponSpawnFrequency": "2"
+    "weaponSpawnFrequency": "2",
+    "enemyNumberSize": "75",
+    "showEnemyNumber": true,
+    "fireCooldown": "250"
   },
   "@@editor": [
     {
@@ -165,9 +168,21 @@
           "type": "text"
         },
         {
-          "key": "shieldDuration",
-          "name": "Shield Duration",
-          "description": "How long the shield lasts in MILISECONDS (Integer)",
+          "key": "showEnemyNumber",
+          "name": "Show Enemy Numbers",
+          "description": "",
+          "type": "boolean"
+        },
+        {
+          "key": "enemyNumberSize",
+          "name": "Enemy Number Size",
+          "description": "How much space the number is occupying relative to the enemy image (1-100)(Integer)",
+          "type": "text"
+        },
+        {
+          "key": "fireCooldown",
+          "name": "Fire Cooldown",
+          "description": "How much time in MILISECONDS between each projectile",
           "type": "text"
         }
       ]

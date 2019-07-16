@@ -44,6 +44,8 @@ let fireCooldown;
 //How much space the number is occupying relative to the enemy image (in percent)
 let enemyNumberSize = 75;
 
+let showEnemyNumbers = true;
+
 //===Images
 let imgLife;
 let imgBackground;
@@ -57,9 +59,12 @@ let imgProjectile;
 //===Audio
 let sndMusic;
 let sndExplosion;
-
 let sndLife;
 let sndLose;
+let sndPowerup;
+let sndShoot;
+let sndEnemyHit;
+let sndEnemyDestroy;
 
 let soundEnabled = true;
 let canMute = true;
@@ -127,6 +132,10 @@ function preload() {
     sndExplosion = loadSound(Koji.config.sounds.explosion);
     sndLife = loadSound(Koji.config.sounds.life);
     sndLose = loadSound(Koji.config.sounds.lose);
+    sndPowerup = loadSound(Koji.config.sounds.powerup);
+    sndShoot = loadSound(Koji.config.sounds.shootSound);
+    sndEnemyHit = loadSound(Koji.config.sounds.enemyHit);
+    sndEnemyDestroy = loadSound(Koji.config.sounds.enemyDestroy);
 
 
     //===Load settings from Game Settings
@@ -146,7 +155,10 @@ function preload() {
 
     enemyDestroyScoreModifier = parseInt(Koji.config.strings.enemyDestroyScoreModifier);
 
-    fireCooldown = 0.25;
+    showEnemyNumbers = Koji.config.strings.showEnemyNumber;
+    enemyNumberSize = parseInt(Koji.config.strings.enemyNumberSize);
+
+    fireCooldown = parseInt(Koji.config.strings.fireCooldown) / 1000;
 
 }
 function setup() {
@@ -182,7 +194,7 @@ function setup() {
     gameBeginning = true;
 
     //Remove comment if you want the music to start
-    //playMusic();
+    playMusic();
 
 
     spawnStarStart();
@@ -353,14 +365,17 @@ function draw() {
 
                     enemies[j].lives--;
 
+
+
                     if (enemies[j].lives > 0) {
 
-
+                        sndEnemyHit.rate(random(0.8, 1.2));
+                        sndEnemyHit.play();
 
                         enemies[j].sizeMod = enemies[j].defaultSize * 1.3;
 
                         //Slow it down a little bit
-                        enemies[j].velocity.y = -enemies[j].defaultVelocity / 6;
+                        enemies[j].velocity.y = -enemies[j].defaultVelocity / 4;
                     } else {
                         enemies[j].destroyed = true;
                     }
@@ -434,11 +449,15 @@ function cleanup() {
             let explosion = new Explosion(x, y)
             explosion.maxSize *= 2;
             explosions.push(explosion);
-      
+
         }
 
         if (enemies[i].removable || enemies[i].destroyed) {
+            if (enemies[i].destroyed) {
+                sndEnemyDestroy.play();
+            }
             enemies.splice(i, 1);
+
         } else {
             enemies[i].assignImage();
         }
@@ -457,6 +476,7 @@ function cleanup() {
             if (collectibles[i].type == 1) {
                 txt = Koji.config.strings.weaponText;
                 color = Koji.config.colors.weaponColor;
+                sndPowerup.play();
             }
 
             floatingTexts.push(new FloatingText(collectibles[i].pos.x, collectibles[i].pos.y, txt, color, objSize));
@@ -629,7 +649,7 @@ function init() {
     projectiles = [];
 
 
-    player = new Player(width / 2, height * 0.8);
+    player = new Player(width / 2, height + objSize * 10);
 
     timeElapsed = 0;
 

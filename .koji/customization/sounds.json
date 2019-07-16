@@ -1,10 +1,13 @@
 {
   "sounds": {
-    "backgroundMusic": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/musicjewels.mp3",
+    "backgroundMusic": "https://objects.koji-cdn.com/d2442438-5d59-4b2a-b875-75a589ffc6d4/ArcadeSpaceAdventures.mp3",
     "explosion": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/explosion.wav",
     "life": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/life.wav",
-    "shield": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/shield.wav",
-    "lose": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/lose.wav"
+    "powerup": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/shield.wav",
+    "lose": "https://objects.koji-cdn.com/52fec6a8-e0dc-45d0-a326-cb1bf8e40b9d/lose.wav",
+    "shootSound": "https://objects.koji-cdn.com/d2442438-5d59-4b2a-b875-75a589ffc6d4/shoot.mp3",
+    "enemyHit": "https://objects.koji-cdn.com/d2442438-5d59-4b2a-b875-75a589ffc6d4/enemyhit.mp3",
+    "enemyDestroy": "https://objects.koji-cdn.com/d2442438-5d59-4b2a-b875-75a589ffc6d4/enemyDie.mp3"
   },
   "@@editor": [
     {
@@ -32,15 +35,33 @@
           "type": "sound"
         },
         {
-          "key": "shield",
-          "name": "Shield Sound",
-          "description": "When you collect a shield",
+          "key": "powerup",
+          "name": "Powerup Sound",
+          "description": "When you collect a powerup",
           "type": "sound"
         },
         {
           "key": "lose",
           "name": "Lose Sound",
           "description": "When you lose the game",
+          "type": "sound"
+        },
+        {
+          "key": "shootSound",
+          "name": "Shoot Sound",
+          "description": "When you shoot",
+          "type": "sound"
+        },
+        {
+          "key": "enemyHit",
+          "name": "Enemy Hit",
+          "description": "When an enemy gets hit",
+          "type": "sound"
+        },
+        {
+          "key": "enemyDestroy",
+          "name": "Enemy Destroy",
+          "description": "When an enemy gets destroyed",
           "type": "sound"
         }
       ]

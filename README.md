@@ -1,6 +1,9 @@
-# Dodge Game
+# Space Blast
 
-A simple game based on avoiding incoming objects! You get points for every enemy that gets to the bottom of the screen! How long can you last?
+Blast your way through space blocks! Each shot decreases their number.
+
+You get score based on enemy starting number.
+
 
 ## Getting Started
 Main code is in *frontend/app/index.js*
@@ -11,7 +14,7 @@ Feel free to modify anything, upgrade the game, add more stuff!
 
 ## About The Game
 
-Controls: Touch and drag to move the object
+Controls: Touch or ARROW KEYS to move, shots are fired automatically
 
 # Customizations
 
@@ -25,7 +28,8 @@ Things that can be customized:
 - Play Button
 - Score and High Score
 - Life text
-- Shield Text
+- Powerup Text
+- Enemy number color
 
 
 ## Images
@@ -34,17 +38,20 @@ Things that can be customized:
 - Player
 - Falling objects (regular and fast)
 - Life collectible
-- Shield collectible
-- Shield
+- Powerup collectible
+- Projectile
+- 6 different enemies
 - Explosion
 
 
 ## Sounds
 - Music
 - Life Sound
-- Shield Sound 
+- Powerup Sound 
 - Explosion Sound
 - Lose game Sound
+- Shoot sound
+- Enemy hit and destroy sound
 
 ## Game Settings
 - Any Google Font can be used
@@ -52,12 +59,12 @@ Things that can be customized:
 - Starting lives
 - Max lives
 - Enemy spawn frequency
-- Life and Shield spawn frequency
+- Life and powerup spawn frequency
 - Enemy average speed
 - Background stars enable/disable
 - Background stars count
-- Score gain
-- Shield duration
+- Shoot cooldown
+
 
 
 ## NOTES
@@ -66,7 +73,4 @@ Avoid resizing the game window while playing, weird stuff happens.
 
 ## Credits for assets
 
-Music - https://opengameart.org/content/crystal-cave-mysterious-ambience-seamless-loop - pixelsphere.org / The Cynic Project
-
-## Support and suggestions
-Please feel free to [contact me](https://gokoji.com/profile/Svarog1389) if you have any suggestions!   
+Music - "Arcade Space Adventures" by Eric Matyas soundimage.org

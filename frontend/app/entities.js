@@ -46,6 +46,7 @@ class Entity {
         scale(this.scale.x, this.scale.y);
         image(this.img, -size / 2, -size / 2, size, size);
         pop();
+
     }
 
     //Basic circle collision
@@ -80,10 +81,10 @@ class Player extends Moveable {
         this.img = imgPlayer;
         this.sizeMod = 1.75;
         this.moveDir = 0;
-        this.startY = this.pos.y;
+        this.startY = height * 0.8;
 
 
-        this.fireTimer = fireCooldown;
+        this.fireTimer = fireCooldown * 3;
 
         this.weaponLevel = 1;
 
@@ -177,6 +178,12 @@ class Player extends Moveable {
 
 
         this.pos.y = this.startY + objSize / 2;
+
+        sndShoot.setVolume(0.8);
+        sndShoot.rate(random(0.8,1.2));
+        sndShoot.play();
+
+        
     }
 }
 
@@ -298,7 +305,7 @@ class Star extends Moveable {
         super(x, y);
         this.pos = createVector(x, y);
         this.velocity = createVector(0, 0);
-        this.size = random() * objSize / 8;
+        this.size = random() * objSize / 5;
 
         this.r = random() * 100 + 155;
         this.g = random() * 100 + 155;
@@ -333,6 +340,9 @@ class Star extends Moveable {
         strokeWeight(0);
 
         circle(this.pos.x, this.pos.y, this.size);
+
+       
+
     }
 }
 
@@ -350,11 +360,15 @@ class Collectible extends Moveable {
         this.velocity.y = this.moveSpeed;
         this.collided = false;
 
+        this.rotSpeed = 0.01;
+
     }
 
     update() {
         super.update();
         this.pos.x = constrain(this.pos.x, objSize, width - objSize);
+
+        this.rotation += this.rotSpeed;
 
         if (this.pos.y > height + objSize) {
             this.removable = true;
