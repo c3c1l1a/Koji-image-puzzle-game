@@ -128,14 +128,14 @@ function preload() {
     muteImage = loadImage(Koji.config.images.muteImage);
 
     //===Load Sounds
-    sndMusic = loadSound(Koji.config.sounds.backgroundMusic);
-    sndExplosion = loadSound(Koji.config.sounds.explosion);
-    sndLife = loadSound(Koji.config.sounds.life);
-    sndLose = loadSound(Koji.config.sounds.lose);
-    sndPowerup = loadSound(Koji.config.sounds.powerup);
-    sndShoot = loadSound(Koji.config.sounds.shootSound);
-    sndEnemyHit = loadSound(Koji.config.sounds.enemyHit);
-    sndEnemyDestroy = loadSound(Koji.config.sounds.enemyDestroy);
+    if (Koji.config.sounds.backgroundMusic) sndMusic = loadSound(Koji.config.sounds.backgroundMusic);
+    if (Koji.config.sounds.explosion) sndExplosion = loadSound(Koji.config.sounds.explosion);
+    if (Koji.config.sounds.life) sndLife = loadSound(Koji.config.sounds.life);
+    if (Koji.config.sounds.lose) sndLose = loadSound(Koji.config.sounds.lose);
+    if (Koji.config.sounds.powerup) sndPowerup = loadSound(Koji.config.sounds.powerup);
+    if (Koji.config.sounds.shootSound) sndShoot = loadSound(Koji.config.sounds.shootSound);
+    if (Koji.config.sounds.enemyHit) sndEnemyHit = loadSound(Koji.config.sounds.enemyHit);
+    if (Koji.config.sounds.enemyDestroy) sndEnemyDestroy = loadSound(Koji.config.sounds.enemyDestroy);
 
 
     //===Load settings from Game Settings
@@ -321,9 +321,10 @@ function draw() {
                 enemies[i].removable = true;
                 enemies[i].collided = true;
 
-                sndExplosion.setVolume(0.2); //too loud if default
-                sndExplosion.play();
-
+                if (sndExplosion) {
+                    sndExplosion.setVolume(0.2); //too loud if default
+                    sndExplosion.play();
+                }
 
 
                 loseLife();
@@ -369,8 +370,10 @@ function draw() {
 
                     if (enemies[j].lives > 0) {
 
-                        sndEnemyHit.rate(random(0.8, 1.2));
-                        sndEnemyHit.play();
+                        if (sndEnemyHit) {
+                            sndEnemyHit.rate(random(0.8, 1.2));
+                            sndEnemyHit.play();
+                        }
 
                         enemies[j].sizeMod = enemies[j].defaultSize * 1.3;
 
@@ -454,7 +457,7 @@ function cleanup() {
 
         if (enemies[i].removable || enemies[i].destroyed) {
             if (enemies[i].destroyed) {
-                sndEnemyDestroy.play();
+                if (sndEnemyDestroy) sndEnemyDestroy.play();
             }
             enemies.splice(i, 1);
 
@@ -476,7 +479,7 @@ function cleanup() {
             if (collectibles[i].type == 1) {
                 txt = Koji.config.strings.weaponText;
                 color = Koji.config.colors.weaponColor;
-                sndPowerup.play();
+                if (sndPowerup) sndPowerup.play();
             }
 
             floatingTexts.push(new FloatingText(collectibles[i].pos.x, collectibles[i].pos.y, txt, color, objSize));
@@ -666,7 +669,7 @@ function loseLife() {
         gameOver = true;
         checkHighscore();
 
-        sndLose.play();
+        if (sndLose) sndLose.play();
     }
 }
 
@@ -678,7 +681,7 @@ function addLife() {
         score += scoreGain;
     }
 
-    sndLife.play();
+    if (sndLife) sndLife.play();
 }
 
 
