@@ -1,40 +1,41 @@
-# p5.js Scaffold
+# `📦 p5.js Scaffold`
 
 Start your day with some p5.js juice!
 
-## Getting Started
+## 😃 Getting Started
 Main code is in *frontend/app/index.js*
 
 I've provided comments in the most important parts of the code, so you don't get lost. 
 
 Feel free to modify anything, upgrade the game, add more stuff!
 
-## About The Game
+## 💥 About The Game
 
 Write about your game here.
 
-# Customizations
+## ⚒️ Customizations
 
 Things that can be customized:
 
-## Colors
+### Colors
 
 - Color names here.
 
 
-## Images
+### Images
+
 - Put all your Image names here.
 
 
-## Sounds
+### Sounds
+
 - Put your Sound names here.
 
-## Game Settings
+### Game Settings
+
 - Put here game settings here.
 
-
-
-## NOTES
+## 📖 Notes
 
 Avoid resizing the game window while playing, weird stuff happens.
 
