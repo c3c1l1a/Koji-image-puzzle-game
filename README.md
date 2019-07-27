@@ -1,9 +1,6 @@
-# Space Blast
+# p5.js Scaffold
 
-Blast your way through space blocks! Each shot decreases their number.
-
-You get score based on enemy starting number.
-
+Start your day with some p5.js juice!
 
 ## Getting Started
 Main code is in *frontend/app/index.js*
@@ -14,7 +11,7 @@ Feel free to modify anything, upgrade the game, add more stuff!
 
 ## About The Game
 
-Controls: Touch or ARROW KEYS to move, shots are fired automatically
+Write about your game here.
 
 # Customizations
 
@@ -22,48 +19,18 @@ Things that can be customized:
 
 ## Colors
 
-- Background
-- Title
-- Instructions
-- Play Button
-- Score and High Score
-- Life text
-- Powerup Text
-- Enemy number color
+- Color names here.
 
 
 ## Images
-- Background (optional)
-- Life Icon
-- Player
-- Falling objects (regular and fast)
-- Life collectible
-- Powerup collectible
-- Projectile
-- 6 different enemies
-- Explosion
+- Put all your Image names here.
 
 
 ## Sounds
-- Music
-- Life Sound
-- Powerup Sound 
-- Explosion Sound
-- Lose game Sound
-- Shoot sound
-- Enemy hit and destroy sound
+- Put your Sound names here.
 
 ## Game Settings
-- Any Google Font can be used
-- All game text
-- Starting lives
-- Max lives
-- Enemy spawn frequency
-- Life and powerup spawn frequency
-- Enemy average speed
-- Background stars enable/disable
-- Background stars count
-- Shoot cooldown
+- Put here game settings here.
 
 
 
@@ -71,6 +38,8 @@ Things that can be customized:
 
 Avoid resizing the game window while playing, weird stuff happens.
 
+Few Koji Visual Customization Controls are already there for you to use. They were put together by @Svarog on Koji platform.
+
 ## Credits for assets
 
-Music - "Arcade Space Adventures" by Eric Matyas soundimage.org
+Put your assets credit here.
