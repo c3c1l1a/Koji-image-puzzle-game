@@ -15,7 +15,7 @@
     -->
 	<link rel="manifest" href="./manifest.webmanifest" />
 
-	<title>Happy Birds</title>
+	<title>p5js Scaffold</title>
 	<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 	<script language="javascript" type="text/javascript"
@@ -39,11 +39,14 @@
 <footer>
 	<!-- Prevent mobile scrolling/refreshing -->
 	<script>
-		document.addEventListener('touchmove', function (e) {
-			e.preventDefault();
-		}, {
-			passive: false
-		});
+		document.addEventListener(
+			'touchmove',
+			function (e) {
+				e.preventDefault()
+			}, {
+				passive: false,
+			}
+		)
 	</script>
 </footer>
 

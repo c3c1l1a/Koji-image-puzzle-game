@@ -12,6 +12,6 @@
  */
 
 export default async (req, res) => {
-    console.log('request running...');
-    res.status(200).json({ response: 'Hello World!' });
+    console.log('request running...')
+    res.status(200).json({ response: 'Hello World!' })
 }

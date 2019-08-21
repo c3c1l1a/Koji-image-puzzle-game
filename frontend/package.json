@@ -7,7 +7,9 @@
     "build": "NODE_ENV=production webpack --config ./.internals/webpack.production.js --color -p --progress --hide-modules --display-optimization-bailout",
     "postbuild": "koji-tools pwa",
     "prestart": "koji-tools watch &",
-    "start": "webpack-dev-server --config ./.internals/webpack.development.js --hot --inline"
+    "start": "webpack-dev-server --config ./.internals/webpack.development.js --hot --inline",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "koji-tools": "^0.5.1"
@@ -18,10 +20,22 @@
     "@babel/preset-env": "^7.4.3",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-wesbos": "0.0.19",
+    "eslint-plugin-html": "^5.0.5",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "prettier": "^1.18.2",
     "script-loader": "^0.7.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.30.0",

@@ -4,7 +4,9 @@
   "scripts": {
     "compile": "babel . -d dist --copy-files --ignore \"node_modules/**/*.js\"",
     "start-dev": "NODE_ENV=development babel-watch -L index.js",
-    "start": "NODE_ENV=production node index.js"
+    "start": "NODE_ENV=production node index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
@@ -18,8 +20,20 @@
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
     "@babel/preset-env": "7.3.1",
+    "babel-eslint": "^9.0.0",
     "babel-plugin-dynamic-import-node": "1.2.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
-    "babel-watch": "git+https://github.com/kmagiera/babel-watch.git"
+    "babel-watch": "git+https://github.com/kmagiera/babel-watch.git",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-wesbos": "0.0.19",
+    "eslint-plugin-html": "^5.0.5",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "prettier": "^1.18.2"
   }
 }

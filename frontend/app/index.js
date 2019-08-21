@@ -1,4 +1,5 @@
-/* global Koji, createCanvas, background, textSize, text */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 
 // Load assets
 function preload() {
