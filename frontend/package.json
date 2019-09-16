@@ -1,18 +1,17 @@
 {
-  "name": "happy-birds",
+  "name": "p5js_scaffold",
   "version": "0.0.1",
-  "description": "Happy birds!",
+  "description": "p5js Scaffold!",
   "author": "kumar_abhirup",
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./.internals/webpack.production.js --color -p --progress --hide-modules --display-optimization-bailout",
-    "postbuild": "koji-tools pwa",
-    "prestart": "koji-tools watch &",
+    "prestart": "koji-vcc watch &",
     "start": "webpack-dev-server --config ./.internals/webpack.development.js --hot --inline",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "koji-tools": "^0.5.1"
+    "@withkoji/vcc": "^1.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

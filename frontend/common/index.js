@@ -8,7 +8,7 @@
  *   file. The global css file is included here as well as our service
  *   worker is registered.
  */
-import Koji from 'koji-tools'
+import Koji from '@withkoji/vcc'
 import './index.css'
 
 Koji.pageLoad()
