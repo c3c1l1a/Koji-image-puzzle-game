@@ -6,9 +6,7 @@ let gridCordMatrix;
 
 function preload(){
   puzzleImage = loadImage("https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg");
-  gridCordMatrix = generateGridCoordMatrix(puzzleDimension);
-  //windowWidth = 800;
-  //windowHeight = 800;
+  gridCordMatrix = generateGridCordMatrix(puzzleDimension);
 }
 
 function setup() {
@@ -52,8 +50,8 @@ function shuffleGrid(grid){
   
   return gridShuffle;
 }
-function generateGridCoordMatrix(dimension){
-  let gridCoordMatrix = [];
+function generateGridCordMatrix(dimension){
+  let gridCordMatrix = [];
   let tileWidth = Math.floor(windowWidth / dimension);
   let tileHeight = Math.floor(windowHeight / dimension);
   for (let rows = 0; rows < tileWidth * dimension ; rows += tileWidth ){
@@ -61,9 +59,9 @@ function generateGridCoordMatrix(dimension){
     for (let cols = 0; cols < tileHeight * dimension ; cols += tileHeight ){
       rowArr.push([rows, cols]);
     }
-    gridCoordMatrix.push(rowArr);
+    gridCordMatrix.push(rowArr);
   }
-  return gridCoordMatrix;
+  return gridCordMatrix;
 }
 
 function createGridFromImg(img){
@@ -117,7 +115,7 @@ class Tile {
     text(this.id , this.x + 2 , this.y + 15);
   }
   clicked(emptyNeighbour){
-    if (initMouseX > this.x && initMouseX < this.x + this.width && initMouseY > this.y && initMouseY < this.y + this.height) {
+    if (mouseOn(this)) {
       this.emptyNeighbour = emptyNeighbour;
     }
   }
@@ -139,17 +137,19 @@ let tempTile;
 let tempEmpty;
 
 function swapItems2DArr(i1, i2){
-  
+
   let item1 = shuffledGrid[i1[0]][i1[1]];
   let item2 = shuffledGrid[i2[0]][i2[1]];
   
   shuffledGrid[i1[0]][i1[1]] = item2;
   shuffledGrid[i1[0]][i1[1]].x = gridCordMatrix[i1[0]][i1[1]][0];
   shuffledGrid[i1[0]][i1[1]].y = gridCordMatrix[i1[0]][i1[1]][1];
-  
+
   shuffledGrid[i2[0]][i2[1]] = item1;
   shuffledGrid[i2[0]][i2[1]].x = gridCordMatrix[i2[0]][i2[1]][0];
-  shuffledGrid[i2[0]][i2[1]].y = gridCordMatrix[i2[0]][i2[1]][1]; 
+  shuffledGrid[i2[0]][i2[1]].y = gridCordMatrix[i2[0]][i2[1]][1];
+
+  swap = false;
 }
 
 function extractNeighbour(i,j){
@@ -180,15 +180,9 @@ function mouseDragged(){
       let mouseYDistance = abs(initMouseY - mouseY);
       let mouseXDistance = abs(initMouseX - mouseX);
       let emptyNeighbour = extractNeighbour(i, j);
-     
-      if (emptyNeighbour && swap){
-        swapItems2DArr([i, j], emptyNeighbour);
-        tile.x = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].x;
-        tile.y = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].y;
-        tile.emptyNeighbour = "";
-      }
-      
+    
       if (emptyNeighbour && mouseOn(tile) ){
+        console.log("here");
         let emptyTileX = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].x;
         let emptyTileY = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].y;
         
@@ -210,7 +204,13 @@ function mouseDragged(){
           if ( mouseXDistance >= totalXDistance/2)
             swap = true; 
         }
-      } 
+      }
+      if (emptyNeighbour && swap){
+        swapItems2DArr([i, j], emptyNeighbour);
+        tile.x = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].x;
+        tile.y = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].y;
+        tile.emptyNeighbour = "";
+      }
     }
   }
   clear();
@@ -218,7 +218,14 @@ function mouseDragged(){
 }
 
 function mouseReleased(){
-  swap = false;
+  for (let [i, row] of shuffledGrid.entries()){
+    for (let [j, tile] of row.entries()){
+      tile.x = gridCordMatrix[i][j][0];
+      tile.y = gridCordMatrix[i][j][1];
+    }
+  }
+  clear();
+  displayGrid(shuffledGrid);
 }
 
 
