@@ -3,6 +3,7 @@ let puzzleImage;
 let puzzleDimension =  3;
 let shuffledGrid;
 let gridCordMatrix;
+let finalGridConfig; 
 
 function preload(){
   puzzleImage = loadImage("https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg");
@@ -12,20 +13,23 @@ function preload(){
 function setup() {
   createCanvas(windowWidth, windowHeight);
   let puzzleGrid = createGridFromImg(puzzleImage);
+  finalGridConfig = getFinalGridConfig(puzzleGrid);
   displayGrid(puzzleGrid);
   shuffledGrid = shuffleGrid(puzzleGrid);
-   setTimeout(()=>{clear(); displayGrid(shuffledGrid)}, 300);
+  setTimeout(()=>{clear(); displayGrid(shuffledGrid)}, 300);
+
 }
-function cloneShuffledGrid(){
-  let clonedShuffledGrid = [];
-  for (let row of shuffledGrid.entries()){
+function getFinalGridConfig(grid){
+  let gridConfig = [];
+  for (let row of grid.entries()){
     let rowArr = [];
     for (let col of row.entries()){
-      rowArr.push(Object.assign({}, col));
+      rowArr.push({id: col.id, x: col.x, y: col.y });
+      
     }
-    clonedShuffledGrid.push(rowArr);
+    gridConfig.push(rowArr);
   }
-  return clonedShuffledGrid;
+  return gridConfig;
 }
 function shuffleGrid(grid){
   let flattenedCoords = [].concat.apply([], gridCordMatrix);
@@ -155,21 +159,14 @@ function swapItems2DArr(i1, i2){
 function extractNeighbour(i,j){
   switch (shuffledGrid[i][j].emptyNeighbour){
     case "top":
-      //console.log("top");
       return [i,j - 1];
     case "bottom":
-      //console.log("bottom");
       return [i, j + 1];
     case "right":
-      //console.log("right");
       return [i + 1, j];
     case "left":
-      //console.log("left");
       return [i - 1, j];
   }
-}
-function count(n){
-  return n++;
 }
 
 function mouseDragged(){
@@ -182,7 +179,6 @@ function mouseDragged(){
       let emptyNeighbour = extractNeighbour(i, j);
     
       if (emptyNeighbour && mouseOn(tile) ){
-        console.log("here");
         let emptyTileX = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].x;
         let emptyTileY = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].y;
         
@@ -250,91 +246,4 @@ function mousePressed(){
         shuffledGrid[row][col].clicked("bottom");
     }
   }
-}
-
-function temp(){
-  for (let neighbour of neighbours){
-        if (neighbour.id == puzzleDimension * puzzleDimension - 1){
-          clear();
-          let tempShuffledGrid = [];
-          for (let [i,row] of shuffledGrid.entries() ){
-            let rowArr = [];
-            for (let [j, col] of row.entries()){
-              let xOffset = initMouseX - this.x;
-              let yOffset = initMouseY - this.y;
-              let xMouseDistance = mouseX - initMouseX;
-              let yMouseDistance = mouseY - initMouseY;
-              let totalXDistance = this.x - gridCordMatrix[i][j][0];
-              let totalYDistance = this.y - gridCordMatrix[i][j][1];
-              let speed = 0.1;
-              
-              if (col.id == neighbour.id ){
-                col = this;
-                if (totalXDistance == 0){
-                  col.x = gridCordMatrix[i][j][0];
-                  col.y = mouseY - yOffset;
-                  col.y += speed * Math.sign(totalXDistance);
-                  //if (mouseRelease){
-                  //  col.y = gridCordMatrix[i][j][1];
-                  //}
-                  //
-                } 
-                if (totalYDistance == 0){
-                  col.y = gridCordMatrix[i][j][1];
-                  col.x = mouseX - xOffset;
-                  col.x += speed * Math.sign(totalYDistance);
-                  //if (mouseRelease)
-                  //  col.x = gridCordMatrix[i][j][0];
-                  
-                }
-                //col.y = gridCordMatrix[i][j][1];
-                //col.x = mouseX - xOffset;
-                
-          
-              } else if (col.id == this.id ){
-                col = neighbour;
-                //col.x += -xOffset;
-                //col.y += -xOffset;
-                col.x = gridCordMatrix[i][j][0];
-                col.y = gridCordMatrix[i][j][1];
-              }
-              rowArr.push(col);
-            }
-            tempShuffledGrid.push(rowArr);
-            shuffledGrid = tempShuffledGrid;
-          }
-           displayGrid(shuffledGrid);
-        }
-      }
-}
-function randomIntFromInterval(min,max)
-{
-    return Math.floor(Math.random()*(max-min+1)+min);
-}
-
-if(Array.prototype.equals)
-    console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
-// attach the .equals method to Array's prototype to call it on any array
-Array.prototype.equals = function (array) {
-    // if the other array is a falsy value, return
-    if (!array)
-        return false;
-
-    // compare lengths - can save a lot of time 
-    if (this.length != array.length)
-        return false;
-
-    for (var i = 0, l=this.length; i < l; i++) {
-        // Check if we have nested arrays
-        if (this[i] instanceof Array && array[i] instanceof Array) {
-            // recurse into the nested arrays
-            if (!this[i].equals(array[i]))
-                return false;       
-        }           
-        else if (this[i] != array[i]) { 
-            // Warning - two different object instances will never be equal: {x:20} != {x:20}
-            return false;   
-        }           
-    }       
-    return true;
 }
