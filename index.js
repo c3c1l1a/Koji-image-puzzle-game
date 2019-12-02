@@ -1,18 +1,22 @@
-
 let puzzleImage;
 let puzzleDimension =  3;
 let shuffledGrid;
-let finalGridConfig;
+let originalGridConfig;
 let gameStarted = false;
 let win = false
+let cnvWidth;
 
 function preload(){
   puzzleImage = loadImage("https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg");
-  finalGridConfig = getFinalGridConfig(puzzleDimension);
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  cnvWidth = windowWidth > windowHeight? windowHeight: windowWidth;
+  cnvWidth -= 10;
+  let cnv = createCanvas(cnvWidth, cnvWidth);
+  cnv.parent("game");
+  
+  originalGridConfig = getOriginalGridConfig(puzzleDimension);
   let puzzleGrid = createGridFromImg(puzzleImage);
   displayGrid(puzzleGrid);
   shuffledGrid = shuffleGrid(puzzleGrid);
@@ -20,7 +24,7 @@ function setup() {
 }
 
 function shuffleGrid(grid){
-  let flattenedGridConfig = [].concat.apply([], finalGridConfig);
+  let flattenedGridConfig = [].concat.apply([], originalGridConfig);
   let flattenedGrid = [].concat.apply([], grid);
   let row = 0;
   let shuffledFlattnedGrid = [];
@@ -42,36 +46,36 @@ function shuffleGrid(grid){
   
   return gridShuffle;
 }
-function getFinalGridConfig(dimension){
-  let finalGridConfig = [];
-  let tileWidth = Math.floor(windowWidth / dimension);
-  let tileHeight = Math.floor(windowHeight / dimension);
+function getOriginalGridConfig(dimension){
+  let originalGridConfig = [];
+  let tileWidth = Math.floor(cnvWidth / dimension);
+  let tileHeight = Math.floor(cnvWidth / dimension);
   let id = 0;
-
   for (let row = 0; row < tileWidth * dimension ; row += tileWidth ){
     let rowArr = [];
     for (let col = 0; col < tileHeight * dimension ; col += tileHeight ){
       rowArr.push({id: id, x: row, y: col, width: tileWidth, height: tileHeight});
       id++;
     }
-    finalGridConfig.push(rowArr);
+    originalGridConfig.push(rowArr);
   }
-  return finalGridConfig;
+  return originalGridConfig;
 }
 
 function createGridFromImg(img){
-  let pg = createGraphics(windowWidth, windowHeight);
+  let pg = createGraphics(cnvWidth, cnvWidth );
   pg.background(img);
   
   let tileId = 0;
   let puzzleGrid = [];
   
-  for (let row of finalGridConfig){
+  console.log(originalGridConfig);
+  for (let row of originalGridConfig){
     let rowsArr = [];
     for (let  config of row){
       let splitImage = pg.get(config.x, config.y, config.width, config.height);
       let tile;
-      if (tileId == (Math.pow(finalGridConfig.length, 2) - 1))
+      if (tileId == (Math.pow(originalGridConfig.length, 2) - 1))
         tile = new Tile(tileId, config.x, config.y, config.width, config.height);
       else 
         tile = new Tile(tileId, config.x, config.y, config.width, config.height, splitImage);
@@ -135,13 +139,13 @@ function swapItems2DArr(i1, i2){
   let item2 = shuffledGrid[i2[0]][i2[1]];
   
   shuffledGrid[i1[0]][i1[1]] = item2;
-  shuffledGrid[i1[0]][i1[1]].x = finalGridConfig[i1[0]][i1[1]].x;
-  shuffledGrid[i1[0]][i1[1]].y = finalGridConfig[i1[0]][i1[1]].y;
+  shuffledGrid[i1[0]][i1[1]].x = originalGridConfig[i1[0]][i1[1]].x;
+  shuffledGrid[i1[0]][i1[1]].y = originalGridConfig[i1[0]][i1[1]].y;
 
   shuffledGrid[i2[0]][i2[1]] = item1;
-  shuffledGrid[i2[0]][i2[1]].x = finalGridConfig[i2[0]][i2[1]].x;
-  shuffledGrid[i2[0]][i2[1]].y = finalGridConfig[i2[0]][i2[1]].y;
-
+  shuffledGrid[i2[0]][i2[1]].x = originalGridConfig[i2[0]][i2[1]].x;
+  shuffledGrid[i2[0]][i2[1]].y = originalGridConfig[i2[0]][i2[1]].y;
+  
   swap = false;
 }
 
@@ -162,8 +166,8 @@ function mouseDragged(){
   if (gameStarted && !win){
     for (let [i,row] of shuffledGrid.entries()){
       for (let [j, tile] of row.entries()){
-        let xOffset = initMouseX - finalGridConfig[i][j].x;
-        let yOffset = initMouseY - finalGridConfig[i][j].y;
+        let xOffset = initMouseX - originalGridConfig[i][j].x;
+        let yOffset = initMouseY - originalGridConfig[i][j].y;
         let mouseYDistance = abs(initMouseY - mouseY);
         let mouseXDistance = abs(initMouseX - mouseX);
         let emptyNeighbour = extractNeighbour(i, j);
@@ -172,14 +176,14 @@ function mouseDragged(){
           let emptyTileX = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].x;
           let emptyTileY = shuffledGrid[emptyNeighbour[0]][emptyNeighbour[1]].y;
           
-          let totalXDistance = abs(emptyTileX - finalGridConfig[i][j].x);
-          let totalYDistance = abs(emptyTileY - finalGridConfig[i][j].y);
+          let totalXDistance = abs(emptyTileX - originalGridConfig[i][j].x);
+          let totalYDistance = abs(emptyTileY - originalGridConfig[i][j].y);
           
-          let yInRange = abs(tile.y - (emptyTileY + finalGridConfig[i][j].y)/2) <=
-                         abs((emptyTileY - finalGridConfig[i][j].y)/2);
+          let yInRange = abs(tile.y - (emptyTileY + originalGridConfig[i][j].y)/2) <=
+                         abs((emptyTileY - originalGridConfig[i][j].y)/2);
         
-          let xInRange = abs(tile.x - (emptyTileX + finalGridConfig[i][j].x)/2) <=
-                         abs((emptyTileX - finalGridConfig[i][j].x)/2);
+          let xInRange = abs(tile.x - (emptyTileX + originalGridConfig[i][j].x)/2) <=
+                         abs((emptyTileX - originalGridConfig[i][j].x)/2);
         
           if (totalXDistance == 0 && yInRange){
             tile.y = mouseY - yOffset;
@@ -201,14 +205,14 @@ function mouseDragged(){
     }
     clear();
     displayGrid(shuffledGrid);
-    checkFinalGridConfig();
+    checkoriginalGridConfig();
   }
 }
 
-function checkFinalGridConfig(){
+function checkoriginalGridConfig(){
   for (let [i, row] of shuffledGrid.entries()){
     for (let [j, tile] of row.entries()){
-      if (tile.x != finalGridConfig[i][j].x || tile.y != finalGridConfig[i][j].y || tile.id != finalGridConfig[i][j].id)
+      if (tile.x != originalGridConfig[i][j].x || tile.y != originalGridConfig[i][j].y || tile.id != originalGridConfig[i][j].id)
         return;
     }
   }
@@ -225,8 +229,8 @@ function mouseReleased(){
   if (gameStarted && !win){
     for (let [i, row] of shuffledGrid.entries()){
       for (let [j, tile] of row.entries()){
-        tile.x = finalGridConfig[i][j].x;
-        tile.y = finalGridConfig[i][j].y;
+        tile.x = originalGridConfig[i][j].x;
+        tile.y = originalGridConfig[i][j].y;
       }
     }
     clear();
