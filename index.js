@@ -13,8 +13,7 @@ function preload(){
 function setup() {
   cnvWidth = windowWidth > windowHeight? windowHeight: windowWidth;
   cnvWidth -= 10;
-  let cnv = createCanvas(cnvWidth, cnvWidth);
-  cnv.parent("game");
+  createCanvas(cnvWidth, cnvWidth);
   
   originalGridConfig = getOriginalGridConfig(puzzleDimension);
   let puzzleGrid = createGridFromImg(puzzleImage);
@@ -145,7 +144,7 @@ function swapItems2DArr(i1, i2){
   shuffledGrid[i2[0]][i2[1]] = item1;
   shuffledGrid[i2[0]][i2[1]].x = originalGridConfig[i2[0]][i2[1]].x;
   shuffledGrid[i2[0]][i2[1]].y = originalGridConfig[i2[0]][i2[1]].y;
-  
+
   swap = false;
 }
 
