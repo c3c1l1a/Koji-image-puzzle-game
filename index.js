@@ -5,6 +5,7 @@ let originalGridConfig;
 let gameStarted = false;
 let win = false
 let cnvWidth;
+let moves=0;
 
 function preload(){
   puzzleImage = loadImage("https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg");
@@ -12,14 +13,30 @@ function preload(){
 
 function setup() {
   cnvWidth = windowWidth > windowHeight? windowHeight: windowWidth;
-  cnvWidth -= 10;
-  createCanvas(cnvWidth, cnvWidth);
-  
+  let cnv = createCanvas(cnvWidth, cnvWidth);
+  positionDomElms();
+
   originalGridConfig = getOriginalGridConfig(puzzleDimension);
   let puzzleGrid = createGridFromImg(puzzleImage);
   displayGrid(puzzleGrid);
   shuffledGrid = shuffleGrid(puzzleGrid);
   setTimeout(()=>{clear(); displayGrid(shuffledGrid); gameStarted=true}, 3000);
+}
+
+function positionDomElms(){
+  removeElements();
+  let sidebar = createDiv();
+  sidebar.id("sidebar");
+
+  if (windowWidth > windowHeight){
+    sidebar.position(cnvWidth+10, 0+10);
+    sidebar.size(windowWidth - windowHeight, windowHeight);
+  } else {
+    sidebar.position(0+10, cnvWidth+10);
+    sidebar.size(windowWidth, 30);
+  }
+  let movesElm = createP(moves).id("moves");
+  sidebar.child(movesElm);
 }
 
 function shuffleGrid(grid){
@@ -145,6 +162,8 @@ function swapItems2DArr(i1, i2){
   shuffledGrid[i2[0]][i2[1]].x = originalGridConfig[i2[0]][i2[1]].x;
   shuffledGrid[i2[0]][i2[1]].y = originalGridConfig[i2[0]][i2[1]].y;
 
+  moves++;
+  positionDomElms();
   swap = false;
 }
 
