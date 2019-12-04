@@ -6,6 +6,7 @@ let gameStarted = false;
 let win = false
 let cnvWidth;
 let moves=0;
+let cnv;
 
 function preload(){
   puzzleImage = loadImage("https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg");
@@ -13,7 +14,7 @@ function preload(){
 
 function setup() {
   cnvWidth = windowWidth > windowHeight? windowHeight: windowWidth;
-  let cnv = createCanvas(cnvWidth, cnvWidth);
+  cnv = createCanvas(cnvWidth-10, cnvWidth-10);
   positionDomElms();
 
   originalGridConfig = getOriginalGridConfig(puzzleDimension);
@@ -29,11 +30,17 @@ function positionDomElms(){
   sidebar.id("sidebar");
 
   if (windowWidth > windowHeight){
-    sidebar.position(cnvWidth+10, 0+10);
-    sidebar.size(windowWidth - windowHeight, windowHeight);
+    let sidebarXpos = windowWidth*5/6;
+    let cnvXpos = (sidebarXpos-cnvWidth)/2;
+    sidebar.position(sidebarXpos, 0);
+    sidebar.size(windowWidth - sidebarXpos, windowHeight);
+    cnv.position(cnvXpos, 0+5);
   } else {
-    sidebar.position(0+10, cnvWidth+10);
-    sidebar.size(windowWidth, 30);
+    let sidebarYpos = windowHeight*5/6;
+    let cnvYpos = (sidebarYpos-cnvWidth)/2;
+    sidebar.position(0, sidebarYpos);
+    sidebar.size(windowWidth, windowHeight - sidebarYpos );
+    cnv.position(0+5, cnvYpos);
   }
   let movesElm = createP(moves).id("moves");
   sidebar.child(movesElm);
