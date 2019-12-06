@@ -120,4 +120,5 @@ $ git push github master # <- only if you also maintain a GitHub Repository
 
 ## Credits for assets
 
-Put your assets credit here.
+# Koji-image-puzzle-game
+Made with p5js
