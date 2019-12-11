@@ -33,3 +33,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#gameContainer {
+  width: 100px;
+  height: 100px;
+}

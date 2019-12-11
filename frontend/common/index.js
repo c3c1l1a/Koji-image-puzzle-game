@@ -13,12 +13,10 @@ import Koji from '@withkoji/vcc';
 import { h, render } from 'preact';
 import './index.css';
 
-Koji.pageLoad()
 window.Koji = Koji
 
 function init(){
 	let GameContainer = require('../app/components/GameContainer').default;
-	console.log(GameContainer);
 	render(<GameContainer />, document.body, root);
 }
 init();

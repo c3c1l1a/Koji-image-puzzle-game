@@ -1,12 +1,9 @@
 import { h, Component } from 'preact';
+import index from '../index.js';
 
 export default class GameContainer extends Component {
-	componentWillMount() {
-		require('script-loader!app/index.js');
-	}
-
-	commponentDidMount(){
-		this.p5Game = new p5(null, document.getElementById('game-container'));
+	componentDidMount(){
+		this.p5Game = new p5(index, document.getElementById('game-container'));
 	}
 
 	componentWillUnmount() {
